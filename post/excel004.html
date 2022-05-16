@@ -1,0 +1,143 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="renderer" content="webkit">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Excel 基础：公式 - 0x400</title>
+  
+
+
+
+
+ 
+ 
+  
+ 
+
+
+
+ 
+
+<meta name="keywords" content="Excel,0x400,Vivaldi,Google" />
+
+
+
+
+
+<meta name="decription" content="公式以等号开头，单元格最终显示的是等号后“计算”的结果，例如=10，最终显示为 10。
+规则如下图，等号后可跟数字、字符、运算、函数等形式。
+引用等号后直接跟值并没有什么实际意义，我们需要公式和其他单元格的值联系起..." />
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    body{
+      background:url( https://www.bing.com/th?id=OHR.WindmillDay_EN-US5180406924_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp) fixed center  no-repeat;
+      background-size: cover;
+    }
+  </style>
+<meta name="generator" content="Hexo 6.2.0"></head>
+<body>
+<header id="header">
+  <div class="container">
+    <div class="site-name">
+      <a id="logo" href="https://0x400.net"><img src="/logo.jpg" alt="0x400"/></a> 
+      <h1>0x400</h1>
+    </div>
+    <nav>
+    <a href="https://0x400.net">首页</a>
+    
+    <a class="current title" href="/post/excel004.html">
+    Excel 基础：公式
+    
+    </a>
+    
+   </nav>
+  </div>
+</header><!-- end #header -->
+<div id="body">
+  <div class="container">
+    <div id="main" role="main">
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <h1 class="post-title" itemprop="name headline"><a itemprop="url"  href="/post/excel004.html">Excel 基础：公式</a></h1>
+  <ul class="post-meta">
+    <li><span class="title">发表于：</span>
+      <time datetime="2019-07-16T16:31:00+08:00" itemprop="datePublished">2019-07-16</time>
+    </li>
+    <li><span class="title">更新于：</span>
+      <time datetime="2022-05-16T14:12:04+08:00" itemprop="dateModified">2022-05-16</time>
+    </li>
+    <li><span class="title">分类：</span> <a class="category-link" href="/category/office/">Office</a></li>
+  </ul>
+  <div class="post-content" itemprop="articleBody">
+    <p>公式以等号开头，单元格最终显示的是等号后“计算”的结果，例如<code>=10</code>，最终显示为 10。</p>
+<h2 id="规则"><a href="#规则" class="headerlink" title="规则"></a>规则</h2><p>如下图，等号后可跟数字、字符、运算、函数等形式。<br><img src="/images/2019/07/1782443661.png"></p>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p>等号后直接跟值并没有什么实际意义，我们需要公式和其他单元格的值联系起来，这就有了引用的概念。</p>
+<p><img src="/images/2019/07/2206281162.png"><br>一个单元格对应了唯一的列号和行号，“列号+行号”即为一个单元格的<strong>引用</strong>，如上图的 <code>B2</code>，当在其他单元格使用公式<code>=B2</code>时，最终就会显示 B2 单元格的值。</p>
+<span id="more"></span>
+<p><img src="/images/2019/07/2480977492.png"></p>
+<p>除了单独引用一个单元格，在一些场景下还能引用行、列、区域等：</p>
+<ul>
+<li><code>A1</code>，A1</li>
+<li><code>A1:C1</code>，A1 到 C1</li>
+<li><code>A1:A3</code>， A1 到 A3</li>
+<li><code>A1:c3</code>，A1 和 C3 中间的区域</li>
+<li><code>A:A</code>，A 列，<code>A:C</code>，A 列到 C 列</li>
+<li><code>1:1</code>，第 1 行，<code>1:3</code>，第 1 行到第 3 行</li>
+</ul>
+<h2 id="相对引用、相对引用、相对引用"><a href="#相对引用、相对引用、相对引用" class="headerlink" title="相对引用、相对引用、相对引用"></a>相对引用、相对引用、相对引用</h2><p>当选中有公式的单元格来复制粘贴时，公式里的引用会根据粘贴的位置变化而变化。<br>如下图，原引用为<code>A1</code>，粘贴的位置相对于原来的向右移动了一列向下移动了一行，所以变成了<code>B2</code><br><img src="/images/2019/07/3885627330.gif" alt="copyf.gif"></p>
+<p>当选中有公式的单元格来自动填充时，公式也会根据位置来变化。<br>如下图，第一次的公式为<code>=E3</code>,向下自动填充，则行号依次增加。<br><img src="/images/2019/07/2393207383.gif" alt="autofillf.gif"></p>
+<p>如果想行号或列号不变化则需要在他们前面加美元符号：</p>
+<ul>
+<li><code>A1</code>为相对引用，行列都会变</li>
+<li><code>$A$1</code>为绝对引用，行列都不会变</li>
+<li><code>$A1</code>为混合引用，列号不变化、行号会变化</li>
+<li><code>A$1</code>为混合引用，列号会变化、列号不变化</li>
+</ul>
+<p>##函数<br>Excel 内置了很多函数，使用函数可以快速的解决复杂的问题。<br>以最常用的求和为例，如果求 A1 到 A10 的单元格的和会这样写：<code>A1+A2+...+A10</code>，使用函数则简单了：<code>SUM(A1:A10)</code></p>
+<p>SUM 为函数的名称，括号内是函数的参数，函数可以没有参数，也可以有多个参数。<br>例如下图 SUM 函数可以有一个参数<code>A:A</code>，表示求 A 列所有单元格的和。<br><img src="/images/2019/07/1942414460.png"><br>多个参数用逗号隔开，例如 SUM 函数可以有多个参数<code>A1,A2</code>，表示求 A1 和 A2 的和。</p>
+<p>函数支持嵌套，函数的参数可以又是一个函数，例如<code>SUM(A1,ABS(B1))</code>,第二个参数为函数<code>ABS(B1)</code>表示求 B1 的绝对值。</p>
+<p>通过下图的方法可以找到每一个函数的说明：<br><img src="/images/2019/07/1428686416.gif" alt="f.gif"></p>
+ 
+  </div>
+  
+  <p>标签：<a class="tag--link" href="/tag/excel/" rel="tag">Excel</a><p>
+  
+</article>
+</div>
+    <div id="secondary" role="complementary"><section class="widget">
+  <h3 class="widget-title">最新文章</h3>
+   <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/post/powershell-copy-item.html">PowerShell 教程：Copy-Item 复制文件和文件夹</a></li><li class="post-list-item"><a class="post-list-link" href="/post/zabbix-email-alert.html">Zabbix 教程：设置邮件报警</a></li><li class="post-list-item"><a class="post-list-link" href="/post/zabbix.html">Zabbix 介绍及使用教程</a></li><li class="post-list-item"><a class="post-list-link" href="/post/debian10-install-zabbix.html">腾讯云轻量服务器 Debian 10 安装 Zabbix 5.4</a></li><li class="post-list-item"><a class="post-list-link" href="/post/huawei-tc7102.html">华为 TC7102 电信定制版路由器接 ITV 机顶盒</a></li><li class="post-list-item"><a class="post-list-link" href="/post/synology.html">群晖折腾记</a></li></ul>
+</section>
+<section class="widget">
+  <h3 class="widget-title">分类</h3>
+   <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/category/dotnet/">.NET</a></li><li class="category-list-item"><a class="category-list-link" href="/category/adobe/">Adobe</a></li><li class="category-list-item"><a class="category-list-link" href="/category/bitcron/">Bitcron</a></li><li class="category-list-item"><a class="category-list-link" href="/category/farbox/">Farbox</a></li><li class="category-list-item"><a class="category-list-link" href="/category/office/">Office</a></li><li class="category-list-item"><a class="category-list-link" href="/category/opera/">Opera</a></li><li class="category-list-item"><a class="category-list-link" href="/category/wordpress/">Wordpress</a></li><li class="category-list-item"><a class="category-list-link" href="/category/code/">代码片段</a></li><li class="category-list-item"><a class="category-list-link" href="/category/develop/">有点技术</a></li><li class="category-list-item"><a class="category-list-link" href="/category/run/">科学上网</a></li><li class="category-list-item"><a class="category-list-link" href="/category/default/">闲言碎语</a></li></ul>
+</section>
+<section class="widget">
+  <h3 class="widget-title">标签</h3>
+  <div class="tagcloud"><a href="/tag/android/" style="font-size: 12.86px;">Android</a> <a href="/tag/csharp/" style="font-size: 17.14px;">C#</a> <a href="/tag/css/" style="font-size: 12.86px;">CSS</a> <a href="/tag/chrome/" style="font-size: 11.43px;">Chrome</a> <a href="/tag/dropbox/" style="font-size: 10px;">Dropbox</a> <a href="/tag/excel/" style="font-size: 15.71px;">Excel</a> <a href="/tag/google/" style="font-size: 12.86px;">Google</a> <a href="/tag/html5/" style="font-size: 14.29px;">Html5</a> <a href="/tag/javascript/" style="font-size: 15.71px;">JavaScript</a> <a href="/tag/JavaScript-Google/" style="font-size: 10px;">JavaScript,Google</a> <a href="/tag/Linux/" style="font-size: 14.29px;">Linux</a> <a href="/tag/markdown/" style="font-size: 11.43px;">Markdown</a> <a href="/tag/php/" style="font-size: 11.43px;">PHP</a> <a href="/tag/photoshop/" style="font-size: 11.43px;">Photoshop</a> <a href="/tag/powershell/" style="font-size: 11.43px;">PowerShell</a> <a href="/tag/windows/" style="font-size: 20px;">Windows</a> <a href="/tag/Zabbix/" style="font-size: 12.86px;">Zabbix</a> <a href="/tag/extension/" style="font-size: 18.57px;">扩展</a> <a href="/tag/%E6%A8%A1%E6%9D%BF/" style="font-size: 12.86px;">模板</a> <a href="/tag/template/" style="font-size: 20px;">模版</a> <a href="/tag/network/" style="font-size: 12.86px;">网络</a></div>
+</section>
+<section class="widget">
+  <h3 class="widget-title">归档</h3>
+  <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">2021 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">2021 年 07 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">2020 年 12 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">2020 年 09 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">2020 年 05 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">2020 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">2019 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">2019 年 07 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">2019 年 06 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">2019 年 01 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">2018 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">2018 年 07 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">2018 年 06 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">2018 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">2017 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">2017 年 05 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">2017 年 04 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">2017 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">2017 年 02 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">2016 年 10 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">2016 年 09 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">2016 年 05 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">2015 年 12 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">2015 年 11 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">2015 年 09 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">2014 年 10 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">2014 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">2014 年 02 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">2014 年 01 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">2013 年 12 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">2013 年 09 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">2013 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">2013 年 07 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">2013 年 06 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">2013 年 05 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">2013 年 04 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/02/">2013 年 02 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/01/">2013 年 01 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">2012 年 12 月</a></li></ul>
+</section></div><!-- end #sidebar -->
+  </div>
+</div><!-- end #body -->
+<footer id="footer">&copy; 2012-2022 <a href="https://0x400.net">0x400</a></footer><!-- end #footer -->
+<script type="text/javascript" src="/highlight.min.js"></script>
+<script>
+hljs.highlightAll();            
+</script>
+<script type="text/javascript" src="/highlightjs-line-numbers.min.js"></script>
+<script>
+hljs.initLineNumbersOnLoad();            
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id='UA-115734355-1"></script>
+<script>
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
+ gtag('config', 'UA-115734355-1');
+</script>
+</body>
+</html>

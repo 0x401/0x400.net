@@ -1,0 +1,312 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="renderer" content="webkit">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>0x400</title>
+  
+
+
+
+
+
+
+ 
+
+<meta name="keywords" content=",0x400,Vivaldi,Google" />
+
+
+
+<meta name="decription" content="" />
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    body{
+      background:url( https://www.bing.com/th?id=OHR.WindmillDay_EN-US5180406924_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp) fixed center  no-repeat;
+      background-size: cover;
+    }
+  </style>
+<meta name="generator" content="Hexo 6.2.0"></head>
+<body>
+<header id="header">
+  <div class="container">
+    <div class="site-name">
+      <a id="logo" href="https://0x400.net"><img src="/logo.jpg" alt="0x400"/></a> 
+      <h1>0x400</h1>
+    </div>
+    <nav>
+    <a class="current" href="https://0x400.net">博客</a>
+    
+    
+   </nav>
+  </div>
+</header><!-- end #header -->
+<div id="body">
+  <div class="container">
+    <div id="main" role="main">
+ 
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+      <h2 class="post-title" itemprop="name headline"><a itemprop="url"  href="/post/opera15-extension-_context_menus.html">Opera15扩展：自定义右键菜单</a></h2>
+      <ul class="post-meta">
+        <li><span class="title">发表于：</span><time datetime="2013-07-14T13:00:00+08:00" itemprop="datePublished">2013-07-14</time></li>
+        <li><span class="title">分类：</span> <a class="category-link" href="/category/opera/">Opera</a></li>
+      </ul>
+      <div class="post-content" itemprop="articleBody">
+       
+        <p>本文根据 <a target="_blank" rel="noopener" href="http://dev.opera.com/extension-docs/tut_context_menus.html" title="context_menus">Opera 官方文档</a>编写，介绍如何使用扩展添加右键菜单。</p>
+<p>通过 Opera 扩展，可以给网页上下文菜单添加选项，例如给链接右键菜单添加复制链接文本的菜单项，这样就可以方便的复制链接标题了。</p>
+<p>要自定义菜单首先得在 <code>manifest.json</code> 文件里声明 <code>contextMenus</code> 权限，同样也可以在其中定义菜单前的图标。</p>
+        <p class="more"><a class="btn" href="/post/opera15-extension-_context_menus.html#more" rel="contents">- 阅读剩余部分 -</a></p>
+       
+      </div>
+    </article>
+  
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+      <h2 class="post-title" itemprop="name headline"><a itemprop="url"  href="/post/opera15-extension-tab_window.html">Opera15扩展：标签和窗口的操作</a></h2>
+      <ul class="post-meta">
+        <li><span class="title">发表于：</span><time datetime="2013-07-13T16:40:00+08:00" itemprop="datePublished">2013-07-13</time></li>
+        <li><span class="title">分类：</span> <a class="category-link" href="/category/opera/">Opera</a></li>
+      </ul>
+      <div class="post-content" itemprop="articleBody">
+       
+        <p>本文根据 <a target="_blank" rel="noopener" href="http://dev.opera.com/extension-docs/tut_tab_window.html" title="tab_window">Opera 官方文档</a>编写，介绍扩展中对标签和窗口的简单操作。</p>
+<p>无论操作是标签还是窗口都需要在 <code>manifest.json</code> 文件中声明 <code>tabs</code> 权限</p>
+<pre><code class="json">&#123;
+  ...
+  &quot;permissions&quot;: [&quot;tabs&quot;],
+  ...
+&#125;
+</code></pre>
+<p><strong>创建标签</strong></p>
+<pre><code class="javascript">chrome.browserAction.onClicked.addListener(function() &#123;
+  chrome.tabs.create(&#123;&#39;url&#39;: &#39;http://sxlf.org&#39;&#125;);
+&#125;);
+</code></pre>
+        <p class="more"><a class="btn" href="/post/opera15-extension-tab_window.html#more" rel="contents">- 阅读剩余部分 -</a></p>
+       
+      </div>
+    </article>
+  
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+      <h2 class="post-title" itemprop="name headline"><a itemprop="url"  href="/post/opera15-extension-message_passing.html">Opera15扩展：扩展内脚本间消息传递</a></h2>
+      <ul class="post-meta">
+        <li><span class="title">发表于：</span><time datetime="2013-07-13T15:39:00+08:00" itemprop="datePublished">2013-07-13</time></li>
+        <li><span class="title">分类：</span> <a class="category-link" href="/category/opera/">Opera</a></li>
+      </ul>
+      <div class="post-content" itemprop="articleBody">
+       
+        <p>本文根据 <a target="_blank" rel="noopener" href="http://dev.opera.com/extension-docs/tut_message_passing.html" title="message_passing">Opera 官方文档</a>编写，介绍扩展中各脚本消息传递相关的内容。</p>
+<p>消息传递有两种方式，一种是简单的通信，一种是高级的通信。</p>
+<p><strong>简短的通信</strong></p>
+<p>直接通过 <code>runtime.sendMessage()</code> 或 <code>tabs.sendMessage()</code> 方法发送消息，通过用 <code>runtime.onMessage()</code> 方法接收消息。</p>
+<p>后台脚本消息发送消息用 <code>tabs.sendMessage()</code>，内容脚本发送消息用 <code>runtime.sendMessage()</code>。</p>
+        <p class="more"><a class="btn" href="/post/opera15-extension-message_passing.html#more" rel="contents">- 阅读剩余部分 -</a></p>
+       
+      </div>
+    </article>
+  
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+      <h2 class="post-title" itemprop="name headline"><a itemprop="url"  href="/post/opera15-extension-browser_actions.html">Opera15扩展：浏览器按钮(button-popups-badges)</a></h2>
+      <ul class="post-meta">
+        <li><span class="title">发表于：</span><time datetime="2013-07-13T12:26:00+08:00" itemprop="datePublished">2013-07-13</time></li>
+        <li><span class="title">分类：</span> <a class="category-link" href="/category/opera/">Opera</a></li>
+      </ul>
+      <div class="post-content" itemprop="articleBody">
+       
+        <p>本文根据 <a target="_blank" rel="noopener" href="http://dev.opera.com/extension-docs/tut_browser_actions.html" title="browser_actions">Opera 官方文档</a>编写，介绍扩展中“浏览器按钮”相关的内容。</p>
+<p>Opera 扩展中按钮有两种形式，一种是 Browser Action，一种是 Page Action。</p>
+<p>Browser Action 针对的是整个浏览器，可以控制窗口内的所有标签。Page Action 则只对当前显示的标签有效，所以它是显示在地址栏内的。</p>
+        <p class="more"><a class="btn" href="/post/opera15-extension-browser_actions.html#more" rel="contents">- 阅读剩余部分 -</a></p>
+       
+      </div>
+    </article>
+  
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+      <h2 class="post-title" itemprop="name headline"><a itemprop="url"  href="/post/Wordpress%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AF%BC%E8%88%AA%E8%8F%9C%E5%8D%95%E8%AF%A6%E8%A7%A3.html">Wordpress自定义导航菜单详解</a></h2>
+      <ul class="post-meta">
+        <li><span class="title">发表于：</span><time datetime="2013-06-10T18:47:00+08:00" itemprop="datePublished">2013-06-10</time></li>
+        <li><span class="title">分类：</span> <a class="category-link" href="/category/wordpress/">Wordpress</a></li>
+      </ul>
+      <div class="post-content" itemprop="articleBody">
+       
+        <p>这里来详细讲一下如何自定义导航菜单，有三个步骤</p>
+<p><strong>1.注册</strong></p>
+<p>通过在 <code>function.php</code> 调用 <a target="_blank" rel="noopener" href="http://sxlf.org/wordpress-register_nav_menu.html" title="wordpress 注册导航菜单:register_nav_menu()"><code>register_nav_menu()</code></a>  或者 <code>register_nav_menus()</code>，完成此步后你的主题就支持自定义导航菜单的功能了。</p>
+<p><strong>2.设置</strong></p>
+<p>在<code>后台-外观-菜单</code>中自定义你的导航菜单。</p>
+        <p class="more"><a class="btn" href="/post/Wordpress%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AF%BC%E8%88%AA%E8%8F%9C%E5%8D%95%E8%AF%A6%E8%A7%A3.html#more" rel="contents">- 阅读剩余部分 -</a></p>
+       
+      </div>
+    </article>
+  
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+      <h2 class="post-title" itemprop="name headline"><a itemprop="url"  href="/post/wordpress-register_nav_menu.html">Wordpress注册导航菜单:register_nav_menu()</a></h2>
+      <ul class="post-meta">
+        <li><span class="title">发表于：</span><time datetime="2013-06-10T18:13:00+08:00" itemprop="datePublished">2013-06-10</time></li>
+        <li><span class="title">分类：</span> <a class="category-link" href="/category/wordpress/">Wordpress</a></li>
+      </ul>
+      <div class="post-content" itemprop="articleBody">
+       <p><code>register_nav_menu()</code> 用于 WordPress 中注册导航菜单。</p>
+<p><strong>调用</strong></p>
+<pre><code class="php">//在 function.php中 调用
+&lt;?php register_nav_menu( $location, $description ); ?&gt;
+</code></pre>
+<p><strong>参数</strong></p>
+<pre><code class="php">&lt;?php register_nav_menu( 
+      $location,//菜单的名称
+      $description //菜单的描述
+      );
+?&gt;
+</code></pre>
+<p>同时注册多个导航菜单要用到 <code>register_nav_menus()</code> 函数</p>
+<pre><code class="php">&lt;?php
+register_nav_menus( array(
+    &#39;menu1&#39; =&gt; &#39;菜单一&#39;,
+    &#39;menu2&#39; =&gt; &#39;菜单二&#39;
+) );
+?&gt;
+</code></pre>
+<p>另外，注销导航菜单要用到 <code>unregister_nav_menu( $location )</code> 函数，可以用在子主题的 <code>function.php</code> 中。</p>
+
+       
+      </div>
+    </article>
+  
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+      <h2 class="post-title" itemprop="name headline"><a itemprop="url"  href="/post/win7%E5%A6%82%E4%BD%95%E5%9C%A8%E5%B1%80%E5%9F%9F%E7%BD%91%E5%86%85%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6.html">Win7如何在局域网内共享文件</a></h2>
+      <ul class="post-meta">
+        <li><span class="title">发表于：</span><time datetime="2013-05-20T20:19:00+08:00" itemprop="datePublished">2013-05-20</time></li>
+        <li><span class="title">分类：</span> <a class="category-link" href="/category/run/">科学上网</a></li>
+      </ul>
+      <div class="post-content" itemprop="articleBody">
+       
+        <p><strong>开启文件共享</strong></p>
+<p>开启文件共享很简单，在需要共享文件所在的文件夹右键选择“共享”</p>
+<p><img src="/images/2013/05/11.jpg" alt="共享文件"></p>
+<p>Win7 局域网内共享文件的方式有两种方式，一种是“家庭组共享”，一种是“特定用户”。</p>
+<p><strong>家庭组共享</strong></p>
+<p>1.打开“控制面板-网络和 Internet-网络和共享中心”，把你当前的网络设置为“家庭网络”</p>
+<p><img src="/images/2013/05/1.jpg" alt="家庭网络"></p>
+        <p class="more"><a class="btn" href="/post/win7%E5%A6%82%E4%BD%95%E5%9C%A8%E5%B1%80%E5%9F%9F%E7%BD%91%E5%86%85%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6.html#more" rel="contents">- 阅读剩余部分 -</a></p>
+       
+      </div>
+    </article>
+  
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+      <h2 class="post-title" itemprop="name headline"><a itemprop="url"  href="/post/wordpress%E8%87%AA%E5%AE%9A%E4%B9%89%E5%90%8E%E5%8F%B0.html">Wordpress自定义后台</a></h2>
+      <ul class="post-meta">
+        <li><span class="title">发表于：</span><time datetime="2013-04-15T11:02:00+08:00" itemprop="datePublished">2013-04-15</time></li>
+        <li><span class="title">分类：</span> <a class="category-link" href="/category/wordpress/">Wordpress</a></li>
+      </ul>
+      <div class="post-content" itemprop="articleBody">
+       
+        <p><strong>添加菜单</strong></p>
+<p><code>add_menu_page()</code>：添加一个顶级菜单</p>
+<pre><code class="php">&lt;?php   
+add_menu_page( $page_title, //菜单页标题
+               $menu_title, //菜单标题
+               $capability, //访问权限
+               $menu_slug,  //菜单别名
+               $function,   //执行函数
+               $icon_url,   //菜单图标
+               $position    //菜单位置
+             );
+?&gt;
+</code></pre>
+<p><code>add_submenu_page()</code>：添加一个子菜单</p>
+<pre><code class="php">&lt;?php   
+add_submenu_page( $parent_slug, //父菜单别名
+                  $page_title,  //菜单页标题
+                  $menu_title,  //菜单标题
+                  $capability,  //访问权限
+                  $menu_slug,   //菜单别名
+                  $function    //执行函数
+                );
+?&gt;
+</code></pre>
+        <p class="more"><a class="btn" href="/post/wordpress%E8%87%AA%E5%AE%9A%E4%B9%89%E5%90%8E%E5%8F%B0.html#more" rel="contents">- 阅读剩余部分 -</a></p>
+       
+      </div>
+    </article>
+  
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+      <h2 class="post-title" itemprop="name headline"><a itemprop="url"  href="/post/farbox-editor.html">FarBox Editor编辑器发布</a></h2>
+      <ul class="post-meta">
+        <li><span class="title">发表于：</span><time datetime="2013-02-17T22:31:00+08:00" itemprop="datePublished">2013-02-17</time></li>
+        <li><span class="title">分类：</span> <a class="category-link" href="/category/farbox/">Farbox</a></li>
+      </ul>
+      <div class="post-content" itemprop="articleBody">
+       <p>就在春节前 Farbox 放出了 Mac 版的编辑器测试版，自己没有水果也就没去体验，刚上微博发现 Win 平台的也在下午发布了。</p>
+<p>FarBox Editor是专为 Farbox 定制的 MarkDown 语法的编辑器，从某种角度来说，也是 FarBox.com 的客户端。</p>
+<p>打开编辑器会自动获取到你的网盘目录，并且建立一个新文件，文件以当前日期为名，并且在文件头部也会自动标注当前的时间，值得一提的是，编辑器会自动保存文件，让你更专注于写作！</p>
+<p><img src="/images/2013/02/farbox-editor.jpg"></p>
+<p>FarBox Editor的其他特性，来自<a target="_blank" rel="noopener" href="http://blog.farbox.com/post/farbox/farbox-editor">官网介绍</a>：</p>
+<p>1.双语版，简体中文+英文版 </p>
+<p>2.双系统, Mac+Windows</p>
+<p>3.FarBox.com同源的MarkDown解析，支持代码高亮</p>
+<p>4.支持图片直接拖入</p>
+<p>5.博客目录文件的直接管理，快捷的目录（分类）调整 </p>
+<p>6.可自定制HTML模板文件以及CSS文件 </p>
+<p>7.绑定FarBox上的域名</p>
+
+       
+      </div>
+    </article>
+  
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+      <h2 class="post-title" itemprop="name headline"><a itemprop="url"  href="/post/get-xiami-music.html">获取虾米音乐下载链接</a></h2>
+      <ul class="post-meta">
+        <li><span class="title">发表于：</span><time datetime="2013-02-17T14:05:00+08:00" itemprop="datePublished">2013-02-17</time></li>
+        <li><span class="title">分类：</span> <a class="category-link" href="/category/run/">科学上网</a></li>
+      </ul>
+      <div class="post-content" itemprop="articleBody">
+       
+        <p>今天在<a target="_blank" rel="noopener" href="http://www.cnblogs.com/bobzhou/archive/2013/02/16/bobzhou.html">博客园</a>看到的，通过反编译播放器找到解码音乐资源的地址的算法。</p>
+<p>算法这里就不多解释了，原文有分析，这里说一下获取“加密”地址的过程：</p>
+<p>1.进入单首歌曲介绍页，比如 <code>http://www.xiami.com/song/1768914936</code> ,地址后面的数字就是歌曲的 id</p>
+<p>2.根据 id 找到包含歌曲相关信息的 xml 文件地址，例如 <code>http://www.xiami.com/song/playlist/id/1768914936/object_name/default/object_id/0</code></p>
+<p>3.载入 xml ,获取 location 节点的内容，就是“加密”的地址</p>
+        <p class="more"><a class="btn" href="/post/get-xiami-music.html#more" rel="contents">- 阅读剩余部分 -</a></p>
+       
+      </div>
+    </article>
+  
+  <div class="page-navigator"> <a class="extend prev" rel="prev" href="/page/6/">« 前一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/8/">后一页 »</a></div>
+</div>
+    <div id="secondary" role="complementary"><section class="widget">
+  <h3 class="widget-title">最新文章</h3>
+   <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/post/powershell-copy-item.html">PowerShell 教程：Copy-Item 复制文件和文件夹</a></li><li class="post-list-item"><a class="post-list-link" href="/post/zabbix-email-alert.html">Zabbix 教程：设置邮件报警</a></li><li class="post-list-item"><a class="post-list-link" href="/post/zabbix.html">Zabbix 介绍及使用教程</a></li><li class="post-list-item"><a class="post-list-link" href="/post/debian10-install-zabbix.html">腾讯云轻量服务器 Debian 10 安装 Zabbix 5.4</a></li><li class="post-list-item"><a class="post-list-link" href="/post/huawei-tc7102.html">华为 TC7102 电信定制版路由器接 ITV 机顶盒</a></li><li class="post-list-item"><a class="post-list-link" href="/post/synology.html">群晖折腾记</a></li></ul>
+</section>
+<section class="widget">
+  <h3 class="widget-title">分类</h3>
+   <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/category/dotnet/">.NET</a></li><li class="category-list-item"><a class="category-list-link" href="/category/adobe/">Adobe</a></li><li class="category-list-item"><a class="category-list-link" href="/category/bitcron/">Bitcron</a></li><li class="category-list-item"><a class="category-list-link" href="/category/farbox/">Farbox</a></li><li class="category-list-item"><a class="category-list-link" href="/category/office/">Office</a></li><li class="category-list-item"><a class="category-list-link" href="/category/opera/">Opera</a></li><li class="category-list-item"><a class="category-list-link" href="/category/wordpress/">Wordpress</a></li><li class="category-list-item"><a class="category-list-link" href="/category/code/">代码片段</a></li><li class="category-list-item"><a class="category-list-link" href="/category/develop/">有点技术</a></li><li class="category-list-item"><a class="category-list-link" href="/category/run/">科学上网</a></li><li class="category-list-item"><a class="category-list-link" href="/category/default/">闲言碎语</a></li></ul>
+</section>
+<section class="widget">
+  <h3 class="widget-title">标签</h3>
+  <div class="tagcloud"><a href="/tag/android/" style="font-size: 12.86px;">Android</a> <a href="/tag/csharp/" style="font-size: 17.14px;">C#</a> <a href="/tag/css/" style="font-size: 12.86px;">CSS</a> <a href="/tag/chrome/" style="font-size: 11.43px;">Chrome</a> <a href="/tag/dropbox/" style="font-size: 10px;">Dropbox</a> <a href="/tag/excel/" style="font-size: 15.71px;">Excel</a> <a href="/tag/google/" style="font-size: 12.86px;">Google</a> <a href="/tag/html5/" style="font-size: 14.29px;">Html5</a> <a href="/tag/javascript/" style="font-size: 15.71px;">JavaScript</a> <a href="/tag/JavaScript-Google/" style="font-size: 10px;">JavaScript,Google</a> <a href="/tag/Linux/" style="font-size: 14.29px;">Linux</a> <a href="/tag/markdown/" style="font-size: 11.43px;">Markdown</a> <a href="/tag/php/" style="font-size: 11.43px;">PHP</a> <a href="/tag/photoshop/" style="font-size: 11.43px;">Photoshop</a> <a href="/tag/powershell/" style="font-size: 11.43px;">PowerShell</a> <a href="/tag/windows/" style="font-size: 20px;">Windows</a> <a href="/tag/Zabbix/" style="font-size: 12.86px;">Zabbix</a> <a href="/tag/extension/" style="font-size: 18.57px;">扩展</a> <a href="/tag/%E6%A8%A1%E6%9D%BF/" style="font-size: 12.86px;">模板</a> <a href="/tag/template/" style="font-size: 20px;">模版</a> <a href="/tag/network/" style="font-size: 12.86px;">网络</a></div>
+</section>
+<section class="widget">
+  <h3 class="widget-title">归档</h3>
+  <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">2021 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">2021 年 07 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">2020 年 12 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">2020 年 09 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">2020 年 05 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">2020 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">2019 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">2019 年 07 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">2019 年 06 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">2019 年 01 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">2018 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">2018 年 07 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">2018 年 06 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">2018 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">2017 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">2017 年 05 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">2017 年 04 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">2017 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">2017 年 02 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">2016 年 10 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">2016 年 09 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">2016 年 05 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">2015 年 12 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">2015 年 11 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">2015 年 09 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">2014 年 10 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">2014 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">2014 年 02 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">2014 年 01 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">2013 年 12 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">2013 年 09 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">2013 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">2013 年 07 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">2013 年 06 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">2013 年 05 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">2013 年 04 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/02/">2013 年 02 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/01/">2013 年 01 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">2012 年 12 月</a></li></ul>
+</section></div><!-- end #sidebar -->
+  </div>
+</div><!-- end #body -->
+<footer id="footer">&copy; 2012-2022 <a href="https://0x400.net">0x400</a></footer><!-- end #footer -->
+<script type="text/javascript" src="/highlight.min.js"></script>
+<script>
+hljs.highlightAll();            
+</script>
+<script type="text/javascript" src="/highlightjs-line-numbers.min.js"></script>
+<script>
+hljs.initLineNumbersOnLoad();            
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id='UA-115734355-1"></script>
+<script>
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
+ gtag('config', 'UA-115734355-1');
+</script>
+</body>
+</html>

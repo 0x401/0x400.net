@@ -1,0 +1,214 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="renderer" content="webkit">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>PowerShell 教程：Copy-Item 复制文件和文件夹 - 0x400</title>
+  
+
+
+
+
+ 
+ 
+  
+  
+  
+ 
+ 
+  
+ 
+
+
+
+ 
+
+<meta name="keywords" content="Windows,PowerShell,0x400,Vivaldi,Google" />
+
+
+
+
+
+<meta name="decription" content="PowerShell 中使用Copy-Item将一个项目从一个位置复制到另一个位置，可以是复制单个文件、也可以复制文件夹。
+复制文件和文件夹最简单的复制一个文件到另一个文件夹内，如果目标文件夹不存在会自动创建。
+C..." />
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    body{
+      background:url( https://www.bing.com/th?id=OHR.WindmillDay_EN-US5180406924_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp) fixed center  no-repeat;
+      background-size: cover;
+    }
+  </style>
+<meta name="generator" content="Hexo 6.2.0"></head>
+<body>
+<header id="header">
+  <div class="container">
+    <div class="site-name">
+      <a id="logo" href="https://0x400.net"><img src="/logo.jpg" alt="0x400"/></a> 
+      <h1>0x400</h1>
+    </div>
+    <nav>
+    <a href="https://0x400.net">首页</a>
+    
+    <a class="current title" href="/post/powershell-copy-item.html">
+    PowerShell 教程：Copy-Item 复制文件和文件夹
+    
+    </a>
+    
+   </nav>
+  </div>
+</header><!-- end #header -->
+<div id="body">
+  <div class="container">
+    <div id="main" role="main">
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <h1 class="post-title" itemprop="name headline"><a itemprop="url"  href="/post/powershell-copy-item.html">PowerShell 教程：Copy-Item 复制文件和文件夹</a></h1>
+  <ul class="post-meta">
+    <li><span class="title">发表于：</span>
+      <time datetime="2021-08-11T11:32:00+08:00" itemprop="datePublished">2021-08-11</time>
+    </li>
+    <li><span class="title">更新于：</span>
+      <time datetime="2022-05-16T14:12:04+08:00" itemprop="dateModified">2022-05-16</time>
+    </li>
+    <li><span class="title">分类：</span> <a class="category-link" href="/category/develop/">有点技术</a></li>
+  </ul>
+  <div class="post-content" itemprop="articleBody">
+    <p>PowerShell 中使用<code>Copy-Item</code>将一个项目从一个位置复制到另一个位置，可以是复制单个文件、也可以复制文件夹。</p>
+<h2 id="复制文件和文件夹"><a href="#复制文件和文件夹" class="headerlink" title="复制文件和文件夹"></a>复制文件和文件夹</h2><p>最简单的复制一个文件到另一个文件夹内，如果目标文件夹不存在会自动创建。</p>
+<pre><code class="powershell">Copy-Item &quot;E:\PowerShell\form\1.txt&quot; -Destination &quot;E:\PowerShell\to\&quot;
+</code></pre>
+<p>如果<code>-Destination</code>参数是文件名，就会重命名文件。</p>
+<pre><code class="powershell">Copy-Item &quot;E:\PowerShell\form\1.txt&quot; -Destination &quot;E:\PowerShell\to\2.txt&quot;
+</code></pre>
+<p>使用通配符可以复制文件夹内所有文件到另一个文件内，加上<code>-Recurse</code>就能复制所有的文件和子文件夹的内容。</p>
+<pre><code class="powershell">Copy-Item &quot;E:\PowerShell\form\*&quot; -Destination &quot;E:\PowerShell\to\&quot; -Recurse
+</code></pre>
+<span id="more"></span>
+<p>注意，在复制文件夹时，<strong>当 to 文件夹不存在时</strong>，效果和上面一样，但实际功能是<strong>复制 from 文件夹并且重命名为 to</strong>。<br>当 to 文件夹已存在时，最终的结果目录结构会是 <code>E:\PowerShell\to\from\</code>，也就是把整个 from 文件夹复制到 to 文件夹内。</p>
+<pre><code class="powershell">Copy-Item &quot;E:\PowerShell\form\&quot; -Destination &quot;E:\PowerShell\to\ -Recurse&quot;
+</code></pre>
+<h2 id="排除和包含"><a href="#排除和包含" class="headerlink" title="排除和包含"></a>排除和包含</h2><p>使用<code>-Filter</code>参数可以设置复制特定文件名的文件或文件夹，如下例子，如果文件夹名称是 *.txt 也会被复制。<br>注意，使用此参数时目标文件夹 to 必须是存在的，否则报错。</p>
+<pre><code class="powershell">Copy-Item &quot;E:\PowerShell\from\*&quot; -Destination &quot;E:\PowerShell\to\&quot; -Filter &#39;*.txt&#39;
+</code></pre>
+<p>使用<code>-Exclude</code>或<code>-Include</code>参数来排除或包含文件或文件夹，值是单个文件名，或者是包含多个文件名称的数组，同样这里的文件名也包含文件夹名。</p>
+<pre><code class="powershell">Copy-Item &quot;E:\PowerShell\from\*&quot; -Destination &quot;E:\PowerShell\to\&quot; -Exclude &#39;*.pdf&#39;
+</code></pre>
+<h2 id="不复制空文件夹"><a href="#不复制空文件夹" class="headerlink" title="不复制空文件夹"></a>不复制空文件夹</h2><p>可以通过判断文件夹内项目数量来确定文件夹是否为空。<br>首先通过<code>Get-ChildItem $from -Recurse</code>获取文件夹内所有的项目。<br>然后遍历每个项目，通过<code>$item.PSIsContainer</code>判断是否是文件夹，如果是文件夹且项目个数为 0 则跳过，否则就复制。<br>由于是按照单个项目来复制，所以需要通过替换原目录为新目录来设置目标路径。</p>
+<pre><code class="powershell">$from = &quot;E:\PowerShell\from\&quot;
+$to = &quot;E:\PowerShell\to\&quot;
+$items = Get-ChildItem $from -Recurse
+ForEach ($item in $items)
+&#123;
+    if($item.PSIsContainer -and (Get-ChildItem $($item.FullName)).Count -eq 0)
+    &#123;
+        Continue
+    &#125;else&#123;
+        $t = $item.Fullname.replace(&quot;$from&quot;,&quot;$to&quot;)
+        Copy-Item $item.FullName -Destination $t
+    &#125;
+&#125;
+</code></pre>
+<h2 id="跳过和覆盖"><a href="#跳过和覆盖" class="headerlink" title="跳过和覆盖"></a>跳过和覆盖</h2><p>当复制单个文件时默认会直接覆盖同名文件，如果想跳过需要通过<code>Test-Path</code>来判断是否存在同名文件。</p>
+<pre><code class="powershell">if(!(Test-Path &quot;E:\PowerShell\to\1.txt&quot;))&#123;
+    Copy-Item &quot;E:\PowerShell\from\1.txt&quot; &quot;E:\PowerShell\to\1.txt&quot;
+&#125;else&#123;
+    Write-Host &quot;包含同名文件&quot;
+&#125;
+</code></pre>
+<p>但是当使用通配符复制文件夹内所有内容时，同名的文件夹默认并不会覆盖，而且会报错，这个时候加上<code>-Force</code>参数即可。</p>
+<pre><code class="powershell">Copy-Item &quot;E:\PowerShell\from\*&quot; &quot;E:\PowerShell\to\&quot; -Recurse -Force`
+</code></pre>
+<h2 id="显示复制进度"><a href="#显示复制进度" class="headerlink" title="显示复制进度"></a>显示复制进度</h2><p>Copy-Item 并没有参数来设置显示复制进度的功能，要显示进度需要用到<code>Write-Progress</code>。<br>显示复制单个文件的进度</p>
+<pre><code class="powershell">function Copy-File &#123;
+    param( [string]$from, [string]$to)
+    $ffile = [io.file]::OpenRead($from)
+    $tofile = [io.file]::OpenWrite($to)
+    try &#123;
+        [byte[]]$buff = new-object byte[] 4096
+        [long]$total = [int]$count = 0
+        do &#123;
+            $count = $ffile.Read($buff, 0, $buff.Length)
+            $tofile.Write($buff, 0, $count)
+            $total += $count
+            if ($total % 1mb -eq 0) &#123;
+                Write-Progress -Activity &quot;从[$from]复制到[$to]&quot; -status &quot;复制中&quot; `
+                   -PercentComplete ([long]($total * 100 / $ffile.Length))
+            &#125;
+        &#125; while ($count -gt 0)
+    &#125;
+    finally &#123;
+        $ffile.Dispose()
+        $tofile.Dispose()
+    &#125;
+&#125;
+$from = &quot;E:\PowerShell\from\1.txt&quot;
+$to = &quot;E:\PowerShell\to\1.txt&quot;
+Copy-File $from $to
+</code></pre>
+<p>显示复制多个文件的进度</p>
+<pre><code class="powershell">function Copy-File&#123;
+    Param([string]$from,[string]$to)
+    $Filelist=Get-Childitem &quot;$from&quot; –Recurse
+    $Total=$Filelist.count
+    $Position=0
+
+    foreach ($File in $Filelist)
+    &#123;
+        $Filename=$File.Fullname.replace($from,&#39;&#39;)
+        $DestinationFile=($to+$Filename)
+        Write-Progress -Activity &quot;从[$from]复制到[$to]&quot; -Status &quot;正在复制[$Filename]&quot; -PercentComplete (($Position/$total)*100)
+        Copy-Item $File.FullName -Destination $DestinationFile
+        $Position++
+    &#125;
+
+&#125;
+$from = &quot;E:\PowerShell\from\&quot;
+$to = &quot;E:\PowerShell\to\&quot;
+Copy-File $from $to
+</code></pre>
+<p><em>参考：</em><br><em><a target="_blank" rel="noopener" href="https://www.spguides.com/powershell-copy-item/">https://www.spguides.com/powershell-copy-item/</a></em><br><em><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.management/copy-item">https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.management/copy-item</a></em></p>
+ 
+  </div>
+  
+  <p>标签：<a class="tag--link" href="/tag/powershell/" rel="tag">PowerShell</a>, <a class="tag--link" href="/tag/windows/" rel="tag">Windows</a><p>
+  
+</article>
+</div>
+    <div id="secondary" role="complementary"><section class="widget">
+  <h3 class="widget-title">最新文章</h3>
+   <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/post/powershell-copy-item.html">PowerShell 教程：Copy-Item 复制文件和文件夹</a></li><li class="post-list-item"><a class="post-list-link" href="/post/zabbix-email-alert.html">Zabbix 教程：设置邮件报警</a></li><li class="post-list-item"><a class="post-list-link" href="/post/zabbix.html">Zabbix 介绍及使用教程</a></li><li class="post-list-item"><a class="post-list-link" href="/post/debian10-install-zabbix.html">腾讯云轻量服务器 Debian 10 安装 Zabbix 5.4</a></li><li class="post-list-item"><a class="post-list-link" href="/post/huawei-tc7102.html">华为 TC7102 电信定制版路由器接 ITV 机顶盒</a></li><li class="post-list-item"><a class="post-list-link" href="/post/synology.html">群晖折腾记</a></li></ul>
+</section>
+<section class="widget">
+  <h3 class="widget-title">分类</h3>
+   <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/category/dotnet/">.NET</a></li><li class="category-list-item"><a class="category-list-link" href="/category/adobe/">Adobe</a></li><li class="category-list-item"><a class="category-list-link" href="/category/bitcron/">Bitcron</a></li><li class="category-list-item"><a class="category-list-link" href="/category/farbox/">Farbox</a></li><li class="category-list-item"><a class="category-list-link" href="/category/office/">Office</a></li><li class="category-list-item"><a class="category-list-link" href="/category/opera/">Opera</a></li><li class="category-list-item"><a class="category-list-link" href="/category/wordpress/">Wordpress</a></li><li class="category-list-item"><a class="category-list-link" href="/category/code/">代码片段</a></li><li class="category-list-item"><a class="category-list-link" href="/category/develop/">有点技术</a></li><li class="category-list-item"><a class="category-list-link" href="/category/run/">科学上网</a></li><li class="category-list-item"><a class="category-list-link" href="/category/default/">闲言碎语</a></li></ul>
+</section>
+<section class="widget">
+  <h3 class="widget-title">标签</h3>
+  <div class="tagcloud"><a href="/tag/android/" style="font-size: 12.86px;">Android</a> <a href="/tag/csharp/" style="font-size: 17.14px;">C#</a> <a href="/tag/css/" style="font-size: 12.86px;">CSS</a> <a href="/tag/chrome/" style="font-size: 11.43px;">Chrome</a> <a href="/tag/dropbox/" style="font-size: 10px;">Dropbox</a> <a href="/tag/excel/" style="font-size: 15.71px;">Excel</a> <a href="/tag/google/" style="font-size: 12.86px;">Google</a> <a href="/tag/html5/" style="font-size: 14.29px;">Html5</a> <a href="/tag/javascript/" style="font-size: 15.71px;">JavaScript</a> <a href="/tag/JavaScript-Google/" style="font-size: 10px;">JavaScript,Google</a> <a href="/tag/Linux/" style="font-size: 14.29px;">Linux</a> <a href="/tag/markdown/" style="font-size: 11.43px;">Markdown</a> <a href="/tag/php/" style="font-size: 11.43px;">PHP</a> <a href="/tag/photoshop/" style="font-size: 11.43px;">Photoshop</a> <a href="/tag/powershell/" style="font-size: 11.43px;">PowerShell</a> <a href="/tag/windows/" style="font-size: 20px;">Windows</a> <a href="/tag/Zabbix/" style="font-size: 12.86px;">Zabbix</a> <a href="/tag/extension/" style="font-size: 18.57px;">扩展</a> <a href="/tag/%E6%A8%A1%E6%9D%BF/" style="font-size: 12.86px;">模板</a> <a href="/tag/template/" style="font-size: 20px;">模版</a> <a href="/tag/network/" style="font-size: 12.86px;">网络</a></div>
+</section>
+<section class="widget">
+  <h3 class="widget-title">归档</h3>
+  <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">2021 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">2021 年 07 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">2020 年 12 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">2020 年 09 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">2020 年 05 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">2020 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">2019 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">2019 年 07 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">2019 年 06 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">2019 年 01 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">2018 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">2018 年 07 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">2018 年 06 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">2018 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">2017 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">2017 年 05 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">2017 年 04 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">2017 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">2017 年 02 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">2016 年 10 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">2016 年 09 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">2016 年 05 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">2015 年 12 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">2015 年 11 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">2015 年 09 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">2014 年 10 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">2014 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">2014 年 02 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">2014 年 01 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">2013 年 12 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">2013 年 09 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">2013 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">2013 年 07 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">2013 年 06 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">2013 年 05 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">2013 年 04 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/02/">2013 年 02 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/01/">2013 年 01 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">2012 年 12 月</a></li></ul>
+</section></div><!-- end #sidebar -->
+  </div>
+</div><!-- end #body -->
+<footer id="footer">&copy; 2012-2022 <a href="https://0x400.net">0x400</a></footer><!-- end #footer -->
+<script type="text/javascript" src="/highlight.min.js"></script>
+<script>
+hljs.highlightAll();            
+</script>
+<script type="text/javascript" src="/highlightjs-line-numbers.min.js"></script>
+<script>
+hljs.initLineNumbersOnLoad();            
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id='UA-115734355-1"></script>
+<script>
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
+ gtag('config', 'UA-115734355-1');
+</script>
+</body>
+</html>

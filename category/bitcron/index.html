@@ -1,0 +1,164 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="renderer" content="webkit">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Bitcron - 0x400</title>
+  
+
+
+
+
+
+
+ 
+
+<meta name="keywords" content=",0x400,Vivaldi,Google" />
+
+
+
+<meta name="decription" content="" />
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    body{
+      background:url( https://www.bing.com/th?id=OHR.WindmillDay_EN-US5180406924_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp) fixed center  no-repeat;
+      background-size: cover;
+    }
+  </style>
+<meta name="generator" content="Hexo 6.2.0"></head>
+<body>
+<header id="header">
+  <div class="container">
+    <div class="site-name">
+      <a id="logo" href="https://0x400.net"><img src="/logo.jpg" alt="0x400"/></a> 
+      <h1>0x400</h1>
+    </div>
+    <nav>
+    <a href="https://0x400.net">首页</a>
+    
+    <a class="current title" href="/category/bitcron/">
+    Bitcron
+    
+    </a>
+    
+   </nav>
+  </div>
+</header><!-- end #header -->
+<div id="body">
+  <div class="container">
+    <div id="main" role="main">
+ 
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+      <h2 class="post-title" itemprop="name headline"><a itemprop="url"  href="/post/bitcron-template-mixin.html">Bitcron模板如何重用代码</a></h2>
+      <ul class="post-meta">
+        <li><span class="title">发表于：</span><time datetime="2017-08-22T15:20:00+08:00" itemprop="datePublished">2017-08-22</time></li>
+        <li><span class="title">分类：</span> <a class="category-link" href="/category/bitcron/">Bitcron</a></li>
+      </ul>
+      <div class="post-content" itemprop="articleBody">
+       
+        <p>Bitcron模板中可使用<code>include</code>来引用另一个文件，比如网站侧边栏在首页和分类页都有展示，这里就可以把侧边栏的代码写到单独的模板文件<code>aside.jade</code>中，然后在首页模板<code>index.jade</code>或者分类页模板中直接引用这个文件。</p>
+<pre><code class="jade">//index.jade
+include aside.jade
+</code></pre>
+<p>然而实际上侧边栏有很多部分，在不同页面往往显示的不完全一样，比如首页显示网站信息、分类列表，分类页显示网站信息和最新文章列表。<br>如果用include来实现的话就得判断当前页是首页还是分类页，或者干脆把网站信息、分类列表、最新文章列表都独立成单个文件？这就更复杂了。。</p>
+<p>这个时候就需要用到Bitcron模板中的<code>mixin</code>，mixin相当于自定义函数，我们可以把每个模块独立成函数统一写到<code>mixins.jade</code>文件中，然后在需要的地方用<code>from mixins import</code>来调用。</p>
+        <p class="more"><a class="btn" href="/post/bitcron-template-mixin.html#more" rel="contents">- 阅读剩余部分 -</a></p>
+       
+      </div>
+    </article>
+  
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+      <h2 class="post-title" itemprop="name headline"><a itemprop="url"  href="/post/bitcron-template-code.html">Bitcron模板常用的代码片段</a></h2>
+      <ul class="post-meta">
+        <li><span class="title">发表于：</span><time datetime="2016-10-06T12:43:00+08:00" itemprop="datePublished">2016-10-06</time></li>
+        <li><span class="title">分类：</span> <a class="category-link" href="/category/bitcron/">Bitcron</a></li>
+      </ul>
+      <div class="post-content" itemprop="articleBody">
+       
+        <p>整理了些Bitcron模板常用的代码片段，方便使用，不定期更新。</p>
+<h2 id="全站相关-site"><a href="#全站相关-site" class="headerlink" title="全站相关(site)"></a>全站相关(site)</h2><p>网站标题：<code>site.title</code><br>网站二级标题：<code>site.sub_title</code><br>网站关键词：<code>site.keywords</code><br>网站描述：<code>site.description</code><br>网站所有标签链接:</p>
+<pre><code class="jade">for tag_name in site.tags
+    a(href=&quot;/tag/&#123;&#123;tag_name|urlencode()&#125;&#125;&quot;)= tag_name
+</code></pre>
+<p>网站文章数：<code>get_data(return_count=true,with_page=false)</code><br>网站分类数：<code>get_data(type=&#39;folder&#39;, level=[1,2], return_count=true,min_posts_count=1)</code><br>网站标签数：<code>site.tags.length</code></p>
+        <p class="more"><a class="btn" href="/post/bitcron-template-code.html#more" rel="contents">- 阅读剩余部分 -</a></p>
+       
+      </div>
+    </article>
+  
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+      <h2 class="post-title" itemprop="name headline"><a itemprop="url"  href="/post/bitcron-theme-akina.html">Akina:一个小清新Bitcron模板</a></h2>
+      <ul class="post-meta">
+        <li><span class="title">发表于：</span><time datetime="2016-09-29T21:52:00+08:00" itemprop="datePublished">2016-09-29</time></li>
+        <li><span class="title">分类：</span> <a class="category-link" href="/category/bitcron/">Bitcron</a></li>
+      </ul>
+      <div class="post-content" itemprop="articleBody">
+       <p>设计来自Wordpress的一个非常不错的模版<a target="_blank" rel="noopener" href="http://www.akina.pw/themeakina">http://www.akina.pw/themeakina</a>，我只是改了Bitcron模板实现的代码，99%是原作者的功劳，感谢！<br>预览：<a target="_blank" rel="noopener" href="https://akina.0x400.bitcron.com/">AKina.Bitcron</a><br>源码：<a target="_blank" rel="noopener" href="https://github.com/0x401/Bitcron-themes/tree/master/Akina">https://github.com/0x401/Bitcron-themes/tree/master/Akina</a><br><img src="/images/old/akina.jpg" alt="AKina"></p>
+
+       
+      </div>
+    </article>
+  
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+      <h2 class="post-title" itemprop="name headline"><a itemprop="url"  href="/post/tags-cloud-for-bitcron.html">Bitcron模板：如何添加标签云</a></h2>
+      <ul class="post-meta">
+        <li><span class="title">发表于：</span><time datetime="2016-09-15T10:43:00+08:00" itemprop="datePublished">2016-09-15</time></li>
+        <li><span class="title">分类：</span> <a class="category-link" href="/category/bitcron/">Bitcron</a></li>
+      </ul>
+      <div class="post-content" itemprop="articleBody">
+       <p>虽然并没有技术可言，就当自己做个笔记吧，搞博客这么多年，前前后后也换了好多平台，模板也自己折腾了一些，并没有留下什么，实在惭愧啊。</p>
+<p>所谓的标签云就是一堆标签链接，可能在一起看起来像一坨云？Bitcron 提供了获取网站所有标签的方法<code>site.tags</code>,然后在遍历生成链接就可以咯。</p>
+<pre><code class="javascript">for tag_name, tag_count in site.tags
+    a(href=&quot;/tag/&#123;&#123;tag_name|urlencode()&#125;&#125;&quot;)= tag_name
+</code></pre>
+<p>这里用<code>urlencode()</code>编码了一下<code>tag_name</code>，因为如果出现’C#’这种标签的话，不编码会链接到’C’标签。</p>
+<p>为了体现标签下的文章多少，可以通过<code>tag_count</code>来设置链接字体的大小，玩得转的还可以设置颜色啊字体粗细什么的。</p>
+<pre><code class="javascript">for tag_name, tag_count in site.tags
+    a(href=&quot;/tag/&#123;&#123;tag_name|urlencode()&#125;&#125;&quot;,style=&quot;font-size: &#123;&#123;tag_count*1.5+12 &#125;&#125;px;&quot;)= tag_name
+</code></pre>
+<p>最后效果大概就是这样！<br><img src="/images/old/tags-cloud.jpg" alt="tags-cloud"></p>
+
+       
+      </div>
+    </article>
+  
+  <div class="page-navigator"> <span class="page-number current">1</span></div>
+</div>
+    <div id="secondary" role="complementary"><section class="widget">
+  <h3 class="widget-title">最新文章</h3>
+   <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/post/powershell-copy-item.html">PowerShell 教程：Copy-Item 复制文件和文件夹</a></li><li class="post-list-item"><a class="post-list-link" href="/post/zabbix-email-alert.html">Zabbix 教程：设置邮件报警</a></li><li class="post-list-item"><a class="post-list-link" href="/post/zabbix.html">Zabbix 介绍及使用教程</a></li><li class="post-list-item"><a class="post-list-link" href="/post/debian10-install-zabbix.html">腾讯云轻量服务器 Debian 10 安装 Zabbix 5.4</a></li><li class="post-list-item"><a class="post-list-link" href="/post/huawei-tc7102.html">华为 TC7102 电信定制版路由器接 ITV 机顶盒</a></li><li class="post-list-item"><a class="post-list-link" href="/post/synology.html">群晖折腾记</a></li></ul>
+</section>
+<section class="widget">
+  <h3 class="widget-title">分类</h3>
+   <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/category/dotnet/">.NET</a></li><li class="category-list-item"><a class="category-list-link" href="/category/adobe/">Adobe</a></li><li class="category-list-item"><a class="category-list-link" href="/category/bitcron/">Bitcron</a></li><li class="category-list-item"><a class="category-list-link" href="/category/farbox/">Farbox</a></li><li class="category-list-item"><a class="category-list-link" href="/category/office/">Office</a></li><li class="category-list-item"><a class="category-list-link" href="/category/opera/">Opera</a></li><li class="category-list-item"><a class="category-list-link" href="/category/wordpress/">Wordpress</a></li><li class="category-list-item"><a class="category-list-link" href="/category/code/">代码片段</a></li><li class="category-list-item"><a class="category-list-link" href="/category/develop/">有点技术</a></li><li class="category-list-item"><a class="category-list-link" href="/category/run/">科学上网</a></li><li class="category-list-item"><a class="category-list-link" href="/category/default/">闲言碎语</a></li></ul>
+</section>
+<section class="widget">
+  <h3 class="widget-title">标签</h3>
+  <div class="tagcloud"><a href="/tag/android/" style="font-size: 12.86px;">Android</a> <a href="/tag/csharp/" style="font-size: 17.14px;">C#</a> <a href="/tag/css/" style="font-size: 12.86px;">CSS</a> <a href="/tag/chrome/" style="font-size: 11.43px;">Chrome</a> <a href="/tag/dropbox/" style="font-size: 10px;">Dropbox</a> <a href="/tag/excel/" style="font-size: 15.71px;">Excel</a> <a href="/tag/google/" style="font-size: 12.86px;">Google</a> <a href="/tag/html5/" style="font-size: 14.29px;">Html5</a> <a href="/tag/javascript/" style="font-size: 15.71px;">JavaScript</a> <a href="/tag/JavaScript-Google/" style="font-size: 10px;">JavaScript,Google</a> <a href="/tag/Linux/" style="font-size: 14.29px;">Linux</a> <a href="/tag/markdown/" style="font-size: 11.43px;">Markdown</a> <a href="/tag/php/" style="font-size: 11.43px;">PHP</a> <a href="/tag/photoshop/" style="font-size: 11.43px;">Photoshop</a> <a href="/tag/powershell/" style="font-size: 11.43px;">PowerShell</a> <a href="/tag/windows/" style="font-size: 20px;">Windows</a> <a href="/tag/Zabbix/" style="font-size: 12.86px;">Zabbix</a> <a href="/tag/extension/" style="font-size: 18.57px;">扩展</a> <a href="/tag/%E6%A8%A1%E6%9D%BF/" style="font-size: 12.86px;">模板</a> <a href="/tag/template/" style="font-size: 20px;">模版</a> <a href="/tag/network/" style="font-size: 12.86px;">网络</a></div>
+</section>
+<section class="widget">
+  <h3 class="widget-title">归档</h3>
+  <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">2021 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">2021 年 07 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">2020 年 12 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">2020 年 09 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">2020 年 05 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">2020 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">2019 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">2019 年 07 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">2019 年 06 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">2019 年 01 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">2018 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">2018 年 07 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">2018 年 06 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">2018 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">2017 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">2017 年 05 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">2017 年 04 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">2017 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">2017 年 02 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">2016 年 10 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">2016 年 09 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">2016 年 05 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">2015 年 12 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">2015 年 11 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">2015 年 09 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">2014 年 10 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">2014 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">2014 年 02 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">2014 年 01 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">2013 年 12 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">2013 年 09 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">2013 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">2013 年 07 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">2013 年 06 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">2013 年 05 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">2013 年 04 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/02/">2013 年 02 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/01/">2013 年 01 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">2012 年 12 月</a></li></ul>
+</section></div><!-- end #sidebar -->
+  </div>
+</div><!-- end #body -->
+<footer id="footer">&copy; 2012-2022 <a href="https://0x400.net">0x400</a></footer><!-- end #footer -->
+<script type="text/javascript" src="/highlight.min.js"></script>
+<script>
+hljs.highlightAll();            
+</script>
+<script type="text/javascript" src="/highlightjs-line-numbers.min.js"></script>
+<script>
+hljs.initLineNumbersOnLoad();            
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id='UA-115734355-1"></script>
+<script>
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
+ gtag('config', 'UA-115734355-1');
+</script>
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="renderer" content="webkit">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>有点技术 - 0x400</title>
+  
+
+
+
+
+
+
+ 
+
+<meta name="keywords" content=",0x400,Vivaldi,Google" />
+
+
+
+<meta name="decription" content="" />
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    body{
+      background:url( https://www.bing.com/th?id=OHR.WindmillDay_EN-US5180406924_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp) fixed center  no-repeat;
+      background-size: cover;
+    }
+  </style>
+<meta name="generator" content="Hexo 6.2.0"></head>
+<body>
+<header id="header">
+  <div class="container">
+    <div class="site-name">
+      <a id="logo" href="https://0x400.net"><img src="/logo.jpg" alt="0x400"/></a> 
+      <h1>0x400</h1>
+    </div>
+    <nav>
+    <a href="https://0x400.net">首页</a>
+    
+    <a class="current title" href="/category/develop/page/2/">
+    有点技术
+    
+    </a>
+    
+   </nav>
+  </div>
+</header><!-- end #header -->
+<div id="body">
+  <div class="container">
+    <div id="main" role="main">
+ 
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+      <h2 class="post-title" itemprop="name headline"><a itemprop="url"  href="/post/get-chrome-offline-installer.html">获取Chrome离线安装包</a></h2>
+      <ul class="post-meta">
+        <li><span class="title">发表于：</span><time datetime="2018-08-23T14:45:00+08:00" itemprop="datePublished">2018-08-23</time></li>
+        <li><span class="title">分类：</span> <a class="category-link" href="/category/develop/">有点技术</a></li>
+      </ul>
+      <div class="post-content" itemprop="articleBody">
+       <p>需要向<code>http://tools.google.com/service/update2</code>这个地址post数据，数据内容为XML，返回的数据也是XML，以PHP为例：</p>
+<pre><code class="php">&lt;?php
+header(&quot;Content-type: text/xml&quot;);
+$url = &quot;http://tools.google.com/service/update2&quot;;
+$appid = array(
+               &quot;Stable&quot;=&gt;&quot;8A69D345-D564-463C-AFF1-A69D9E530F96&quot;,
+               &quot;Beta&quot;=&gt;&quot;8237E44A-0054-442C-B6B6-EA0509993955&quot;,
+               &quot;Dev&quot;=&gt;&quot;401C381F-E0DE-4B85-8BD8-3F3F14FBDA57&quot;,
+               &quot;Canary&quot;=&gt;&quot;4EA16AC7-FD5A-47C3-875B-DBF4A2008C20&quot;
+              );
+$ap = array(
+               &quot;Stable&quot;=&gt;array(&quot;x86&quot;=&gt;&quot;-multi-chrome&quot;, &quot;x64&quot;=&gt;&quot;x64-stable-multi-chrome&quot;),
+               &quot;Beta&quot;=&gt;array(&quot;x86&quot;=&gt;&quot;1.1-beta&quot;,&quot;x64&quot;=&gt;&quot;x64-beta-multi-chrome&quot;),
+               &quot;Dev&quot;=&gt;array(&quot;x86&quot;=&gt;&quot;2.0-dev&quot;, &quot;x64&quot;=&gt;&quot;x64-dev-multi-chrome&quot;),
+               &quot;Canary&quot;=&gt;array(&quot;x86&quot;=&gt;&quot;&quot;, &quot;x64&quot;=&gt;&quot;x64-canary&quot;)
+             );
+$branch = $appid[&quot;Stable&quot;];
+$arch = $ap[&quot;Stable&quot;][&quot;x64&quot;];
+$data = &quot;&lt;?xml version=&#39;1.0&#39; encoding=&#39;UTF-8&#39;?&gt;&lt;request protocol=&#39;3.0&#39; ismachine=&#39;0&#39;&gt;&lt;hw sse=&#39;1&#39; sse2=&#39;1&#39; sse3=&#39;1&#39; ssse3=&#39;1&#39; sse41=&#39;1&#39; sse42=&#39;1&#39; avx=&#39;1&#39; physmemory=&#39;12582912&#39; /&gt;&lt;os platform=&#39;win&#39; version=&#39;6.3&#39; arch=&#39;x64&#39;/&gt;&lt;app appid=&#39;&#123;&#123;$branch&#125;&#125;&#39; ap=&#39;$arch&#39;&gt;&lt;updatecheck/&gt;&lt;/app&gt;&lt;/request&gt;&quot;;
+
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL,$url);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+curl_exec($ch);
+curl_close($ch);
+</code></pre>
+<p>执行后结果如下图：<br><img src="/images/2018/08/2899625880.png" alt="getchrome.png"></p>
+<p>?本文参考：<a target="_blank" rel="noopener" href="https://github.com/shuax/getchrome/blob/master/main.py">https://github.com/shuax/getchrome/blob/master/main.py</a></p>
+
+       
+      </div>
+    </article>
+  
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+      <h2 class="post-title" itemprop="name headline"><a itemprop="url"  href="/post/tablesorter.html">Tablesorter 中文简介</a></h2>
+      <ul class="post-meta">
+        <li><span class="title">发表于：</span><time datetime="2018-06-02T10:33:00+08:00" itemprop="datePublished">2018-06-02</time></li>
+        <li><span class="title">分类：</span> <a class="category-link" href="/category/develop/">有点技术</a></li>
+      </ul>
+      <div class="post-content" itemprop="articleBody">
+       
+        <p>Tablesorter是一个JQuery插件，功能是对标准的table进行排序，很简单，只要一句JS代码就能实现点击表头排序的功能，但也很强大，通过设置也能实现表头锁定，Ajax加载数据，分页，主题，复杂表头，表格嵌套等等功能，官方的API头都可以给你看大?。</p>
+<h2 id="简单开始"><a href="#简单开始" class="headerlink" title="简单开始"></a>简单开始</h2><p><strong>引用JS文件</strong></p>
+<pre><code class="html">&lt;script type=&quot;text/javascript&quot; src=&quot;jquery.min.js&quot;&gt;&lt;/script&gt; 
+&lt;script type=&quot;text/javascript&quot; src=&quot;jquery.tablesorter.js&quot;&gt;&lt;/script&gt; 
+</code></pre>
+<p><strong>构造标准的表格</strong></p>
+<pre><code class="html">&lt;table id=&quot;myTable&quot; class=&quot;tablesorter&quot;&gt; 
+&lt;thead&gt; 
+&lt;tr&gt; 
+    &lt;th&gt;Last Name&lt;/th&gt; 
+    &lt;th&gt;First Name&lt;/th&gt; 
+    &lt;th&gt;Email&lt;/th&gt; 
+    &lt;th&gt;Due&lt;/th&gt; 
+    &lt;th&gt;Web Site&lt;/th&gt; 
+&lt;/tr&gt; 
+&lt;/thead&gt; 
+&lt;tbody&gt; 
+&lt;tr&gt; 
+    &lt;td&gt;Smith&lt;/td&gt; 
+    &lt;td&gt;John&lt;/td&gt; 
+    &lt;td&gt;jsmith@gmail.com&lt;/td&gt; 
+    &lt;td&gt;$50.00&lt;/td&gt; 
+    &lt;td&gt;http://www.jsmith.com&lt;/td&gt; 
+&lt;/tr&gt; 
+&lt;tr&gt; 
+    &lt;td&gt;Bach&lt;/td&gt; 
+    &lt;td&gt;Frank&lt;/td&gt; 
+    &lt;td&gt;fbach@yahoo.com&lt;/td&gt; 
+    &lt;td&gt;$50.00&lt;/td&gt; 
+    &lt;td&gt;http://www.frank.com&lt;/td&gt; 
+&lt;/tr&gt; 
+&lt;tr&gt; 
+    &lt;td&gt;Doe&lt;/td&gt; 
+    &lt;td&gt;Jason&lt;/td&gt; 
+    &lt;td&gt;jdoe@hotmail.com&lt;/td&gt; 
+    &lt;td&gt;$100.00&lt;/td&gt; 
+    &lt;td&gt;http://www.jdoe.com&lt;/td&gt; 
+&lt;/tr&gt; 
+&lt;tr&gt; 
+    &lt;td&gt;Conway&lt;/td&gt; 
+    &lt;td&gt;Tim&lt;/td&gt; 
+    &lt;td&gt;tconway@earthlink.net&lt;/td&gt; 
+    &lt;td&gt;$50.00&lt;/td&gt; 
+    &lt;td&gt;http://www.timconway.com&lt;/td&gt; 
+&lt;/tr&gt; 
+&lt;/tbody&gt; 
+&lt;/table&gt; 
+</code></pre>
+<p><strong>对表格应用Tablesorter</strong></p>
+<pre><code class="javascript">$(document).ready(function() 
+    &#123; 
+        $(&quot;#myTable&quot;).tablesorter(); 
+    &#125; 
+); 
+</code></pre>
+<p>到此你的表格就已经被赋予了排序功能，排序点击表头即可~<br><img src="/images/2018/06/3007255532.jpg" alt="tablesorter.jpg"></p>
+<p>没看错，默认的表格就是这么丑，不过Tablesorter支持主题，往下看<br><strong>引用主题css文件</strong></p>
+<pre><code class="html">&lt;link rel=&quot;stylesheet&quot; href=&quot;theme.dropbox.css&quot;&gt;
+</code></pre>
+<p><strong>注册主题</strong></p>
+<pre><code class="javascript">$(&quot;#myTable&quot;).tablesorter(&#123;
+    theme:&quot;dropbox&quot;
+&#125;); 
+</code></pre>
+<p><img src="/images/2018/06/1016845816.jpg" alt="tablesorter1.jpg"></p>
+<p>瞬间回到现代，这是个dropbox风格主题。</p>
+        <p class="more"><a class="btn" href="/post/tablesorter.html#more" rel="contents">- 阅读剩余部分 -</a></p>
+       
+      </div>
+    </article>
+  
+  <div class="page-navigator"> <a class="extend prev" rel="prev" href="/category/develop/">« 前一页</a><a class="page-number" href="/category/develop/">1</a><span class="page-number current">2</span></div>
+</div>
+    <div id="secondary" role="complementary"><section class="widget">
+  <h3 class="widget-title">最新文章</h3>
+   <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/post/powershell-copy-item.html">PowerShell 教程：Copy-Item 复制文件和文件夹</a></li><li class="post-list-item"><a class="post-list-link" href="/post/zabbix-email-alert.html">Zabbix 教程：设置邮件报警</a></li><li class="post-list-item"><a class="post-list-link" href="/post/zabbix.html">Zabbix 介绍及使用教程</a></li><li class="post-list-item"><a class="post-list-link" href="/post/debian10-install-zabbix.html">腾讯云轻量服务器 Debian 10 安装 Zabbix 5.4</a></li><li class="post-list-item"><a class="post-list-link" href="/post/huawei-tc7102.html">华为 TC7102 电信定制版路由器接 ITV 机顶盒</a></li><li class="post-list-item"><a class="post-list-link" href="/post/synology.html">群晖折腾记</a></li></ul>
+</section>
+<section class="widget">
+  <h3 class="widget-title">分类</h3>
+   <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/category/dotnet/">.NET</a></li><li class="category-list-item"><a class="category-list-link" href="/category/adobe/">Adobe</a></li><li class="category-list-item"><a class="category-list-link" href="/category/bitcron/">Bitcron</a></li><li class="category-list-item"><a class="category-list-link" href="/category/farbox/">Farbox</a></li><li class="category-list-item"><a class="category-list-link" href="/category/office/">Office</a></li><li class="category-list-item"><a class="category-list-link" href="/category/opera/">Opera</a></li><li class="category-list-item"><a class="category-list-link" href="/category/wordpress/">Wordpress</a></li><li class="category-list-item"><a class="category-list-link" href="/category/code/">代码片段</a></li><li class="category-list-item"><a class="category-list-link" href="/category/develop/">有点技术</a></li><li class="category-list-item"><a class="category-list-link" href="/category/run/">科学上网</a></li><li class="category-list-item"><a class="category-list-link" href="/category/default/">闲言碎语</a></li></ul>
+</section>
+<section class="widget">
+  <h3 class="widget-title">标签</h3>
+  <div class="tagcloud"><a href="/tag/android/" style="font-size: 12.86px;">Android</a> <a href="/tag/csharp/" style="font-size: 17.14px;">C#</a> <a href="/tag/css/" style="font-size: 12.86px;">CSS</a> <a href="/tag/chrome/" style="font-size: 11.43px;">Chrome</a> <a href="/tag/dropbox/" style="font-size: 10px;">Dropbox</a> <a href="/tag/excel/" style="font-size: 15.71px;">Excel</a> <a href="/tag/google/" style="font-size: 12.86px;">Google</a> <a href="/tag/html5/" style="font-size: 14.29px;">Html5</a> <a href="/tag/javascript/" style="font-size: 15.71px;">JavaScript</a> <a href="/tag/JavaScript-Google/" style="font-size: 10px;">JavaScript,Google</a> <a href="/tag/Linux/" style="font-size: 14.29px;">Linux</a> <a href="/tag/markdown/" style="font-size: 11.43px;">Markdown</a> <a href="/tag/php/" style="font-size: 11.43px;">PHP</a> <a href="/tag/photoshop/" style="font-size: 11.43px;">Photoshop</a> <a href="/tag/powershell/" style="font-size: 11.43px;">PowerShell</a> <a href="/tag/windows/" style="font-size: 20px;">Windows</a> <a href="/tag/Zabbix/" style="font-size: 12.86px;">Zabbix</a> <a href="/tag/extension/" style="font-size: 18.57px;">扩展</a> <a href="/tag/%E6%A8%A1%E6%9D%BF/" style="font-size: 12.86px;">模板</a> <a href="/tag/template/" style="font-size: 20px;">模版</a> <a href="/tag/network/" style="font-size: 12.86px;">网络</a></div>
+</section>
+<section class="widget">
+  <h3 class="widget-title">归档</h3>
+  <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">2021 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">2021 年 07 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">2020 年 12 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">2020 年 09 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">2020 年 05 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">2020 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">2019 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">2019 年 07 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">2019 年 06 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">2019 年 01 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">2018 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">2018 年 07 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">2018 年 06 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">2018 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">2017 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">2017 年 05 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">2017 年 04 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">2017 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">2017 年 02 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">2016 年 10 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">2016 年 09 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">2016 年 05 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">2015 年 12 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">2015 年 11 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">2015 年 09 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">2014 年 10 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">2014 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">2014 年 02 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">2014 年 01 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">2013 年 12 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">2013 年 09 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">2013 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">2013 年 07 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">2013 年 06 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">2013 年 05 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">2013 年 04 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/02/">2013 年 02 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/01/">2013 年 01 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">2012 年 12 月</a></li></ul>
+</section></div><!-- end #sidebar -->
+  </div>
+</div><!-- end #body -->
+<footer id="footer">&copy; 2012-2022 <a href="https://0x400.net">0x400</a></footer><!-- end #footer -->
+<script type="text/javascript" src="/highlight.min.js"></script>
+<script>
+hljs.highlightAll();            
+</script>
+<script type="text/javascript" src="/highlightjs-line-numbers.min.js"></script>
+<script>
+hljs.initLineNumbersOnLoad();            
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id='UA-115734355-1"></script>
+<script>
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
+ gtag('config', 'UA-115734355-1');
+</script>
+</body>
+</html>

@@ -1,0 +1,270 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="renderer" content="webkit">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Windows - 0x400</title>
+  
+
+
+
+
+
+
+ 
+
+<meta name="keywords" content=",0x400,Vivaldi,Google" />
+
+
+
+<meta name="decription" content="" />
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    body{
+      background:url( https://www.bing.com/th?id=OHR.WindmillDay_EN-US5180406924_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp) fixed center  no-repeat;
+      background-size: cover;
+    }
+  </style>
+<meta name="generator" content="Hexo 6.2.0"></head>
+<body>
+<header id="header">
+  <div class="container">
+    <div class="site-name">
+      <a id="logo" href="https://0x400.net"><img src="/logo.jpg" alt="0x400"/></a> 
+      <h1>0x400</h1>
+    </div>
+    <nav>
+    <a href="https://0x400.net">首页</a>
+    
+    <a class="current title" href="/tag/windows/">
+    Windows
+    
+    </a>
+    
+   </nav>
+  </div>
+</header><!-- end #header -->
+<div id="body">
+  <div class="container">
+    <div id="main" role="main">
+ 
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+      <h2 class="post-title" itemprop="name headline"><a itemprop="url"  href="/post/powershell-copy-item.html">PowerShell 教程：Copy-Item 复制文件和文件夹</a></h2>
+      <ul class="post-meta">
+        <li><span class="title">发表于：</span><time datetime="2021-08-11T11:32:00+08:00" itemprop="datePublished">2021-08-11</time></li>
+        <li><span class="title">分类：</span> <a class="category-link" href="/category/develop/">有点技术</a></li>
+      </ul>
+      <div class="post-content" itemprop="articleBody">
+       
+        <p>PowerShell 中使用<code>Copy-Item</code>将一个项目从一个位置复制到另一个位置，可以是复制单个文件、也可以复制文件夹。</p>
+<h2 id="复制文件和文件夹"><a href="#复制文件和文件夹" class="headerlink" title="复制文件和文件夹"></a>复制文件和文件夹</h2><p>最简单的复制一个文件到另一个文件夹内，如果目标文件夹不存在会自动创建。</p>
+<pre><code class="powershell">Copy-Item &quot;E:\PowerShell\form\1.txt&quot; -Destination &quot;E:\PowerShell\to\&quot;
+</code></pre>
+<p>如果<code>-Destination</code>参数是文件名，就会重命名文件。</p>
+<pre><code class="powershell">Copy-Item &quot;E:\PowerShell\form\1.txt&quot; -Destination &quot;E:\PowerShell\to\2.txt&quot;
+</code></pre>
+<p>使用通配符可以复制文件夹内所有文件到另一个文件内，加上<code>-Recurse</code>就能复制所有的文件和子文件夹的内容。</p>
+<pre><code class="powershell">Copy-Item &quot;E:\PowerShell\form\*&quot; -Destination &quot;E:\PowerShell\to\&quot; -Recurse
+</code></pre>
+        <p class="more"><a class="btn" href="/post/powershell-copy-item.html#more" rel="contents">- 阅读剩余部分 -</a></p>
+       
+      </div>
+    </article>
+  
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+      <h2 class="post-title" itemprop="name headline"><a itemprop="url"  href="/post/auto-reconnect-vpn-with-powershell.html">利用 PowerShell 实现 VPN 断线重播</a></h2>
+      <ul class="post-meta">
+        <li><span class="title">发表于：</span><time datetime="2020-03-01T23:19:00+08:00" itemprop="datePublished">2020-03-01</time></li>
+        <li><span class="title">分类：</span> <a class="category-link" href="/category/develop/">有点技术</a></li>
+      </ul>
+      <div class="post-content" itemprop="articleBody">
+       <h2 id="第一步：编写连接-VPN-的脚本"><a href="#第一步：编写连接-VPN-的脚本" class="headerlink" title="第一步：编写连接 VPN 的脚本"></a>第一步：编写连接 VPN 的脚本</h2><p>通过<code>rasdial</code>命令可以连接 VPN，系统中需要提前添加名为<code>CD</code>的 VPN，用户名<code>aaa</code>，密码<code>bbb</code>，可以将连接的结果和当前时间存入<code>vpn.log</code>文件供后续查看。</p>
+<pre><code class="powershell"># vpn-conn.ps1
+$ras = rasdial CD aaa bbb
+$current_time = Get-Date -Format &#39;yyyy-MM-dd HH:mm:ss&#39;
+$current_time , $ras &gt;&gt;  D:\script\vpn.log
+</code></pre>
+<h2 id="第二步：编写-PowerShell-计划任务脚本"><a href="#第二步：编写-PowerShell-计划任务脚本" class="headerlink" title="第二步：编写 PowerShell 计划任务脚本"></a>第二步：编写 PowerShell 计划任务脚本</h2><p><code>Register-ScheduledJob</code>创建计划任务，<code>Get-ScheduledJob</code>获取计划任务，<code>New-JobTrigger</code>定义触发器，<code>Add-JobTrigger</code>给计划任务添加触发器。</p>
+<pre><code class="powershell">$jobName = &#39;vpn-conn&#39;
+$filePath = &#39;D:\script\vpn-conn.ps1&#39;
+#创建任务
+Register-ScheduledJob -Name $jobName -FilePath $filePath
+#获取任务
+$job =  Get-ScheduledJob -Name $jobName
+#定义触发器
+$jobTrigger = New-JobTrigger -Once -At (Get-Date).AddMinutes(1) -RepetitionInterval (New-TimeSpan -Minutes 10 ) -RepeatIndefinitely
+#添加触发器
+$job | Add-JobTrigger -Trigger $jobTrigger
+</code></pre>
+<p>以上命令执行完成后，在系统的计划任务里可以看到已成功添加，另外可以直接用<code>Disable-ScheduledJob</code>和<code>Unregister-ScheduledJob</code>来禁用任务和删除任务。</p>
+<pre><code class="powershell"># 禁用任务
+Disable-ScheduledJob  -Name vpn-conn 
+# 删除任务
+Unregister-ScheduledJob -Name vpn-conn
+</code></pre>
+
+       
+      </div>
+    </article>
+  
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+      <h2 class="post-title" itemprop="name headline"><a itemprop="url"  href="/post/cmd.html">Windows常用命令行</a></h2>
+      <ul class="post-meta">
+        <li><span class="title">发表于：</span><time datetime="2018-06-27T17:19:00+08:00" itemprop="datePublished">2018-06-27</time></li>
+        <li><span class="title">分类：</span> <a class="category-link" href="/category/code/">代码片段</a></li>
+      </ul>
+      <div class="post-content" itemprop="articleBody">
+       <p><code>sc delete [service name]</code>：删除服务，需重启电脑</p>
+
+       
+      </div>
+    </article>
+  
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+      <h2 class="post-title" itemprop="name headline"><a itemprop="url"  href="/post/excel-vlookup.html">Excel公式：Vlookup</a></h2>
+      <ul class="post-meta">
+        <li><span class="title">发表于：</span><time datetime="2018-03-13T10:18:00+08:00" itemprop="datePublished">2018-03-13</time></li>
+        <li><span class="title">分类：</span> <a class="category-link" href="/category/office/">Office</a></li>
+      </ul>
+      <div class="post-content" itemprop="articleBody">
+       
+        <p>Vlookup可以实现在<strong>数据区域</strong>内根据<strong>首列数据</strong>查找<strong>同行其它列数据</strong>，<code>Vlookup(首列数据,数据区域,同行其它列数据,false)</code></p>
+<p>如下图，我们在单元格<code>F5</code>内输入一个商家编号来查询到对应商家的网站显示在单元格F6，所以F5为第一个参数，商家编号和商家网站包含在<code>A2:C11</code>区域里，所以A2:C11为第二个参数，我们想要的商家网站在区域内的第<code>3</code>列，所以第三个参数为3。所以结果单元格F6里最终公式为<code>=VLOOKUP(F5,A2:C11,3,FALSE)</code>，图中报错是因为还没有输入要查询的商家编号。<br><img src="/images/2018/04/1224417096.jpg" alt="vlookup4.jpg"></p>
+<p>Vlookup还能跨工作表查询，<code>Vlookup(首列数据,工作表!数据区域,同行其它列数据,false)</code></p>
+        <p class="more"><a class="btn" href="/post/excel-vlookup.html#more" rel="contents">- 阅读剩余部分 -</a></p>
+       
+      </div>
+    </article>
+  
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+      <h2 class="post-title" itemprop="name headline"><a itemprop="url"  href="/post/ikea.html">如何自由访问宜家全球的网站</a></h2>
+      <ul class="post-meta">
+        <li><span class="title">发表于：</span><time datetime="2017-05-12T14:38:00+08:00" itemprop="datePublished">2017-05-12</time></li>
+        <li><span class="title">分类：</span> <a class="category-link" href="/category/run/">科学上网</a></li>
+      </ul>
+      <div class="post-content" itemprop="articleBody">
+       <p>如果手机访问宜家移动版m.ikea.com默认是有切换国家的功能，但是电脑版<a target="_blank" rel="noopener" href="http://www.ikea.com则不能选择国家而是直接跳转到对应的国家了,比如宜家中国www.ikea.com/cn/zh%EF%BC%8C%E5%8D%B3%E4%BD%BF%E4%BD%A0%E7%9B%B4%E6%8E%A5%E8%AE%BF%E9%97%AEwww.ikea.com/us%E4%B9%9F%E8%BF%98%E6%98%AF%E8%B7%B3%E8%BD%AC%E5%88%B0%E4%B8%AD%E5%9B%BD%E3%80%82">www.ikea.com则不能选择国家而是直接跳转到对应的国家了，比如宜家中国www.ikea.com/cn/zh，即使你直接访问www.ikea.com/us也还是跳转到中国。</a></p>
+<p>只需添加一条host指向宜家美国的ip就可以了。<code>184.26.44.106 www.ikea.com</code>,此时访问首页就不会跳转，而是出现选择国家的页面，完美！<br><img src="/images/old/ikea.jpg" alt="ikea"></p>
+
+       
+      </div>
+    </article>
+  
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+      <h2 class="post-title" itemprop="name headline"><a itemprop="url"  href="/post/win7-across-subnet-sharing.html">Win7局域网跨网段访问共享</a></h2>
+      <ul class="post-meta">
+        <li><span class="title">发表于：</span><time datetime="2017-03-02T14:38:00+08:00" itemprop="datePublished">2017-03-02</time></li>
+        <li><span class="title">分类：</span> <a class="category-link" href="/category/run/">科学上网</a></li>
+      </ul>
+      <div class="post-content" itemprop="articleBody">
+       <p>有两个网段<code>172.16.1.x</code>和<code>172.16.2.x</code>，实现互访共享。<br>通用的办法就是修改子网掩码，但是这里需求只需要访问某几台电脑，比如共享打印机。</p>
+<p>首先设置防火墙规则，在目标机器上添加入站规则，UDP端口137、138，TCP端口139、445，此时用<code>\\ip</code>的形式就已经可以访问了。<br>如果要用<code>\\计算机名</code>访问的话，则需要在客户机的hosts文件里加一条记录，比如:<code>172.16.1.2 PC1</code>，然后就能通过<code>\\PC1</code>来访问了。</p>
+
+       
+      </div>
+    </article>
+  
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+      <h2 class="post-title" itemprop="name headline"><a itemprop="url"  href="/post/acrylic-dns-proxy.html">Acrylic DNS Proxy搭建DNS缓存服务器</a></h2>
+      <ul class="post-meta">
+        <li><span class="title">发表于：</span><time datetime="2017-02-06T22:11:00+08:00" itemprop="datePublished">2017-02-06</time></li>
+        <li><span class="title">分类：</span> <a class="category-link" href="/category/run/">科学上网</a></li>
+      </ul>
+      <div class="post-content" itemprop="articleBody">
+       
+        <p>在Ubuntu上折腾了一阵DNSMASQ实在是不习惯，感觉Linux真是反人类,于是又回到了我大微软的的怀抱。<br>Acrylic DNS Proxy简单的讲就是一个DNS缓存服务器，一次查询后，以后直接从本地取ip，理论上讲访问网站速度更快了~更强大的功能在于他可以通配符配置hosts!</p>
+<h2 id="1-下载安装-Acrylic-DNS-Proxy"><a href="#1-下载安装-Acrylic-DNS-Proxy" class="headerlink" title="1.下载安装 Acrylic DNS Proxy"></a>1.下载安装 Acrylic DNS Proxy</h2><p>可直接去<a target="_blank" rel="noopener" href="http://mayakron.altervista.org/wikibase/show.php?id=AcrylicHome">Acrylic官网</a>下载，不到600K的安装包，下载安装完成。</p>
+<h2 id="2-设置本地连接的DNS为127-0-0-1"><a href="#2-设置本地连接的DNS为127-0-0-1" class="headerlink" title="2.设置本地连接的DNS为127.0.0.1"></a>2.设置本地连接的DNS为127.0.0.1</h2><p>在CMD里用nslookup命令看看是否工作在正常，如果出现请求超时，说明Acrylic的DNS有问题，这时需要修改配置文件。<br><img src="/images/old/nslookup.jpg" alt="nslookup"></p>
+        <p class="more"><a class="btn" href="/post/acrylic-dns-proxy.html#more" rel="contents">- 阅读剩余部分 -</a></p>
+       
+      </div>
+    </article>
+  
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+      <h2 class="post-title" itemprop="name headline"><a itemprop="url"  href="/post/powershell-system.html">Powershell获取系统开关机时间</a></h2>
+      <ul class="post-meta">
+        <li><span class="title">发表于：</span><time datetime="2015-09-05T11:01:00+08:00" itemprop="datePublished">2015-09-05</time></li>
+        <li><span class="title">分类：</span> <a class="category-link" href="/category/code/">代码片段</a></li>
+      </ul>
+      <div class="post-content" itemprop="articleBody">
+       <blockquote>
+<p>原理就是读取系统事件日志 EventLog，事件相关信息也可以在事件查看器 eventvwr.msc 里找到。eventID 和 InstancedId 并不是一定相同的，事件查看器里只能看到 eventId。</p>
+</blockquote>
+<pre><code class="powershell">Get-EventLog -LogName system | where &#123;$_.eventID -eq 12&#125; | format-list -property TimeGenerated
+Get-EventLog -LogName system -InstanceId 12 | format-list -property TimeGenerated
+</code></pre>
+
+       
+      </div>
+    </article>
+  
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+      <h2 class="post-title" itemprop="name headline"><a itemprop="url"  href="/post/cmd-systeminfo.html">获取系统启动时间</a></h2>
+      <ul class="post-meta">
+        <li><span class="title">发表于：</span><time datetime="2015-09-05T10:48:00+08:00" itemprop="datePublished">2015-09-05</time></li>
+        <li><span class="title">分类：</span> <a class="category-link" href="/category/code/">代码片段</a></li>
+      </ul>
+      <div class="post-content" itemprop="articleBody">
+       <blockquote>
+<p>如果是英文系统的话引号里要换成 boot time</p>
+</blockquote>
+<pre><code class="CMD">systeminfo | find /i &quot;系统启动时间&quot;
+</code></pre>
+
+       
+      </div>
+    </article>
+  
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+      <h2 class="post-title" itemprop="name headline"><a itemprop="url"  href="/post/win7-home.html">Win7家庭版用户如何关闭Administrator账户</a></h2>
+      <ul class="post-meta">
+        <li><span class="title">发表于：</span><time datetime="2014-10-18T20:52:00+08:00" itemprop="datePublished">2014-10-18</time></li>
+        <li><span class="title">分类：</span> <a class="category-link" href="/category/code/">代码片段</a></li>
+      </ul>
+      <div class="post-content" itemprop="articleBody">
+       <p>在命令行运行<code>net user administrator /active:no</code>即可。</p>
+
+       
+      </div>
+    </article>
+  
+  <div class="page-navigator"> <span class="page-number current">1</span><a class="page-number" href="/tag/windows/page/2/">2</a><a class="extend next" rel="next" href="/tag/windows/page/2/">后一页 »</a></div>
+</div>
+    <div id="secondary" role="complementary"><section class="widget">
+  <h3 class="widget-title">最新文章</h3>
+   <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/post/powershell-copy-item.html">PowerShell 教程：Copy-Item 复制文件和文件夹</a></li><li class="post-list-item"><a class="post-list-link" href="/post/zabbix-email-alert.html">Zabbix 教程：设置邮件报警</a></li><li class="post-list-item"><a class="post-list-link" href="/post/zabbix.html">Zabbix 介绍及使用教程</a></li><li class="post-list-item"><a class="post-list-link" href="/post/debian10-install-zabbix.html">腾讯云轻量服务器 Debian 10 安装 Zabbix 5.4</a></li><li class="post-list-item"><a class="post-list-link" href="/post/huawei-tc7102.html">华为 TC7102 电信定制版路由器接 ITV 机顶盒</a></li><li class="post-list-item"><a class="post-list-link" href="/post/synology.html">群晖折腾记</a></li></ul>
+</section>
+<section class="widget">
+  <h3 class="widget-title">分类</h3>
+   <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/category/dotnet/">.NET</a></li><li class="category-list-item"><a class="category-list-link" href="/category/adobe/">Adobe</a></li><li class="category-list-item"><a class="category-list-link" href="/category/bitcron/">Bitcron</a></li><li class="category-list-item"><a class="category-list-link" href="/category/farbox/">Farbox</a></li><li class="category-list-item"><a class="category-list-link" href="/category/office/">Office</a></li><li class="category-list-item"><a class="category-list-link" href="/category/opera/">Opera</a></li><li class="category-list-item"><a class="category-list-link" href="/category/wordpress/">Wordpress</a></li><li class="category-list-item"><a class="category-list-link" href="/category/code/">代码片段</a></li><li class="category-list-item"><a class="category-list-link" href="/category/develop/">有点技术</a></li><li class="category-list-item"><a class="category-list-link" href="/category/run/">科学上网</a></li><li class="category-list-item"><a class="category-list-link" href="/category/default/">闲言碎语</a></li></ul>
+</section>
+<section class="widget">
+  <h3 class="widget-title">标签</h3>
+  <div class="tagcloud"><a href="/tag/android/" style="font-size: 12.86px;">Android</a> <a href="/tag/csharp/" style="font-size: 17.14px;">C#</a> <a href="/tag/css/" style="font-size: 12.86px;">CSS</a> <a href="/tag/chrome/" style="font-size: 11.43px;">Chrome</a> <a href="/tag/dropbox/" style="font-size: 10px;">Dropbox</a> <a href="/tag/excel/" style="font-size: 15.71px;">Excel</a> <a href="/tag/google/" style="font-size: 12.86px;">Google</a> <a href="/tag/html5/" style="font-size: 14.29px;">Html5</a> <a href="/tag/javascript/" style="font-size: 15.71px;">JavaScript</a> <a href="/tag/JavaScript-Google/" style="font-size: 10px;">JavaScript,Google</a> <a href="/tag/Linux/" style="font-size: 14.29px;">Linux</a> <a href="/tag/markdown/" style="font-size: 11.43px;">Markdown</a> <a href="/tag/php/" style="font-size: 11.43px;">PHP</a> <a href="/tag/photoshop/" style="font-size: 11.43px;">Photoshop</a> <a href="/tag/powershell/" style="font-size: 11.43px;">PowerShell</a> <a href="/tag/windows/" style="font-size: 20px;">Windows</a> <a href="/tag/Zabbix/" style="font-size: 12.86px;">Zabbix</a> <a href="/tag/extension/" style="font-size: 18.57px;">扩展</a> <a href="/tag/%E6%A8%A1%E6%9D%BF/" style="font-size: 12.86px;">模板</a> <a href="/tag/template/" style="font-size: 20px;">模版</a> <a href="/tag/network/" style="font-size: 12.86px;">网络</a></div>
+</section>
+<section class="widget">
+  <h3 class="widget-title">归档</h3>
+  <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">2021 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">2021 年 07 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">2020 年 12 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">2020 年 09 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">2020 年 05 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">2020 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">2019 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">2019 年 07 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">2019 年 06 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">2019 年 01 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">2018 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">2018 年 07 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">2018 年 06 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">2018 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">2017 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">2017 年 05 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">2017 年 04 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">2017 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">2017 年 02 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">2016 年 10 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">2016 年 09 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">2016 年 05 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">2015 年 12 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">2015 年 11 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">2015 年 09 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">2014 年 10 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">2014 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">2014 年 02 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">2014 年 01 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">2013 年 12 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">2013 年 09 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">2013 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">2013 年 07 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">2013 年 06 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">2013 年 05 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">2013 年 04 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/02/">2013 年 02 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/01/">2013 年 01 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">2012 年 12 月</a></li></ul>
+</section></div><!-- end #sidebar -->
+  </div>
+</div><!-- end #body -->
+<footer id="footer">&copy; 2012-2022 <a href="https://0x400.net">0x400</a></footer><!-- end #footer -->
+<script type="text/javascript" src="/highlight.min.js"></script>
+<script>
+hljs.highlightAll();            
+</script>
+<script type="text/javascript" src="/highlightjs-line-numbers.min.js"></script>
+<script>
+hljs.initLineNumbersOnLoad();            
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id='UA-115734355-1"></script>
+<script>
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
+ gtag('config', 'UA-115734355-1');
+</script>
+</body>
+</html>

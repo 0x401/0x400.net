@@ -1,0 +1,408 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="renderer" content="webkit">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>0x400</title>
+  
+
+
+
+
+
+
+ 
+
+<meta name="keywords" content=",0x400,Vivaldi,Google" />
+
+
+
+<meta name="decription" content="" />
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    body{
+      background:url( https://www.bing.com/th?id=OHR.WindmillDay_EN-US5180406924_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp) fixed center  no-repeat;
+      background-size: cover;
+    }
+  </style>
+<meta name="generator" content="Hexo 6.2.0"></head>
+<body>
+<header id="header">
+  <div class="container">
+    <div class="site-name">
+      <a id="logo" href="https://0x400.net"><img src="/logo.jpg" alt="0x400"/></a> 
+      <h1>0x400</h1>
+    </div>
+    <nav>
+    <a class="current" href="https://0x400.net">博客</a>
+    
+    
+   </nav>
+  </div>
+</header><!-- end #header -->
+<div id="body">
+  <div class="container">
+    <div id="main" role="main">
+ 
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+      <h2 class="post-title" itemprop="name headline"><a itemprop="url"  href="/post/farbox-blog.html">Farbox，让网盘变成博客</a></h2>
+      <ul class="post-meta">
+        <li><span class="title">发表于：</span><time datetime="2013-02-16T15:23:00+08:00" itemprop="datePublished">2013-02-16</time></li>
+        <li><span class="title">分类：</span> <a class="category-link" href="/category/farbox/">Farbox</a></li>
+      </ul>
+      <div class="post-content" itemprop="articleBody">
+       
+        <p>嗯，你只需要一个网盘就能搭建属于自己的博客。</p>
+<p>Farbox 其实是一个网盘应用（应该没理解错吧），目前支持 Dropbox 和金山快盘。</p>
+<p>你的文件同步到 Dropbox 等云端后，FarBox 会去获取它们；然后文章、图片、HTML页各自归档。比如.txt .md .markdown .docx四种后缀的文档，会当做博客的日志来归档。</p>
+<p><strong>注册 Farbox</strong></p>
+<p>这里用金山快盘演示：在 <a target="_blank" rel="noopener" href="http://www.farbox.com/">Farbox</a> 网站上点击“开始 FarBox”，选择“快盘登陆”，登陆成功后会在你的快盘的我的应用里建立一个“FarBox”文件夹，和你博客相关的文件都放在这里面，FarBox 会自动去获取他们。</p>
+        <p class="more"><a class="btn" href="/post/farbox-blog.html#more" rel="contents">- 阅读剩余部分 -</a></p>
+       
+      </div>
+    </article>
+  
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+      <h2 class="post-title" itemprop="name headline"><a itemprop="url"  href="/post/opera-exntension-message.html">Opera扩展:消息</a></h2>
+      <ul class="post-meta">
+        <li><span class="title">发表于：</span><time datetime="2013-02-07T13:04:00+08:00" itemprop="datePublished">2013-02-07</time></li>
+        <li><span class="title">分类：</span> <a class="category-link" href="/category/opera/">Opera</a></li>
+      </ul>
+      <div class="post-content" itemprop="articleBody">
+       
+        <p>Opera 扩展包括有“后台脚本”、“注入脚本”、“弹窗脚本”等，所谓“消息”，各脚本间的数据传递就是通过消息实现的。</p>
+<p>Opera 扩展发送消息的方式有3种，<code>postMessage()</code>&#x2F;<code>broadcastMessage()</code>&#x2F;消息通道。</p>
+<p>例如<strong>在后台脚本和注入脚本之间传递数据:</strong></p>
+<p>可以使用 <code>broadcastMessage()</code> 来发送消息。你可以在后台脚本中这样写:</p>
+<pre><code class="javascript">opera.extension.broadcastMessage(&quot;Hello there&quot;);
+</code></pre>
+        <p class="more"><a class="btn" href="/post/opera-exntension-message.html#more" rel="contents">- 阅读剩余部分 -</a></p>
+       
+      </div>
+    </article>
+  
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+      <h2 class="post-title" itemprop="name headline"><a itemprop="url"  href="/post/csharp-regex-tool.html">C#:正则表达式测试工具</a></h2>
+      <ul class="post-meta">
+        <li><span class="title">发表于：</span><time datetime="2013-01-23T10:17:00+08:00" itemprop="datePublished">2013-01-23</time></li>
+        <li><span class="title">分类：</span> <a class="category-link" href="/category/dotnet/">.NET</a></li>
+      </ul>
+      <div class="post-content" itemprop="articleBody">
+       <p>功能：输入正则表达式即时匹配出结果</p>
+<p><img src="/images/2013/01/reg.jpg" alt="reg"></p>
+<pre><code class="csharp">using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
+
+namespace RegexTool
+&#123;
+    public partial class Form1 : Form
+    &#123;
+        Regex reg;
+        public Form1()
+        &#123;
+            InitializeComponent();
+        &#125;
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        &#123;
+            richTextBox1.SelectAll();
+            richTextBox1.SelectionBackColor = Color.White;
+            regIt();
+        &#125;
+        private void regIt()
+        &#123;
+            try
+            &#123;
+                if (textBox1.Text == &quot;&quot;)
+                &#123;
+                    label1.Text = &quot;&quot;;
+                &#125;
+                else
+                &#123;
+                    reg = new Regex(textBox1.Text);
+                    MatchCollection mc = reg.Matches(@richTextBox1.Text);
+                    int count = 0;
+                    for (int i = 0; i &lt; mc.Count; i++)
+                    &#123;
+                        richTextBox1.Select(mc[i].Index, mc[i].Length);
+                        if ((i + 2) % 2 == 0)
+                        &#123;
+                            richTextBox1.SelectionBackColor = ColorTranslator.FromHtml(&quot;#FFF000&quot;);
+                        &#125;
+                        else
+                        &#123;
+                            richTextBox1.SelectionBackColor = ColorTranslator.FromHtml(&quot;#D2F854&quot;);
+                        &#125;
+                        if (mc[i].Length != 0)
+                        &#123;
+                            count++;
+                        &#125;
+                    &#125;
+                    label1.Text = &quot;结果：&quot; + count + &quot;个&quot;;
+                &#125;
+            &#125;
+            catch (Exception ex)
+            &#123;
+                label1.Text = &quot;错误：&quot; + ex.Message;
+            &#125;
+        &#125;
+        private void richTextBox1_KeyDown(object sender, KeyEventArgs e)
+        &#123;
+            if (e.Control &amp;&amp; e.KeyCode == Keys.V)
+            &#123;
+                e.Handled = true;
+                richTextBox1.Paste(DataFormats.GetFormat(DataFormats.Text));
+            &#125;
+        &#125;
+        private void textBox1_MouseClick(object sender, MouseEventArgs e)
+        &#123;
+            if (textBox1.Text == &quot;在此输入正则表达式&quot;)
+            &#123;
+                textBox1.Clear();
+            &#125;
+        &#125;
+        private void textBox1_Leave(object sender, EventArgs e)
+        &#123;
+            if (textBox1.Text == &quot;&quot;)
+            &#123;
+                textBox1.Text = &quot;在此输入正则表达式&quot;;
+            &#125;
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+
+       
+      </div>
+    </article>
+  
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+      <h2 class="post-title" itemprop="name headline"><a itemprop="url"  href="/post/csharp-flush-dns-cache.html">C#:刷新DNS缓存</a></h2>
+      <ul class="post-meta">
+        <li><span class="title">发表于：</span><time datetime="2013-01-07T10:42:00+08:00" itemprop="datePublished">2013-01-07</time></li>
+        <li><span class="title">分类：</span> <a class="category-link" href="/category/dotnet/">.NET</a></li>
+      </ul>
+      <div class="post-content" itemprop="articleBody">
+       <p>之前的<a target="_blank" rel="noopener" href="http://sxlf.org/post/auto-update-smarthost.html" title="自动更新smarthosts到本地hosts">自动更新 Smarthosts 到本地 hosts</a>最后需要刷新 DNS 缓存，刷新 DNS 缓存首先想到的就是“ipconfig &#x2F;flushdns” 命令，直接调用 cmd.exe 就可以了。不知道 .net 里是否提供了直接刷新 DNS 的方法，于是搜索了一下，很奇怪搜索“ C# 刷新 DNS 缓存”竟然找不到想要的结果，搜索“c# flush dns cache”一下就有答案了。方法大概有两种，一种就是调用 cmd.exe，一种就是调用系统 API:dnsapi.dll，其实 cmd 里方法也是调用 dnsapi.dll 实现的，为了不那么麻烦，这里就直接调用 cmd.exe 了。</p>
+<pre><code class="csharp">using (System.Diagnostics.Process process = new System.Diagnostics.Process())
+&#123;
+System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+startInfo.FileName = &quot;cmd.exe&quot;;
+startInfo.Arguments = &quot;ipconfig /flushdns&quot;;
+process.StartInfo = startInfo;
+process.Start();
+&#125;
+</code></pre>
+
+       
+      </div>
+    </article>
+  
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+      <h2 class="post-title" itemprop="name headline"><a itemprop="url"  href="/post/photoshop-iphone-cloth-grain-style.html">Photoshop:模仿iPhone里的布纹背景图</a></h2>
+      <ul class="post-meta">
+        <li><span class="title">发表于：</span><time datetime="2013-01-04T17:06:00+08:00" itemprop="datePublished">2013-01-04</time></li>
+        <li><span class="title">分类：</span> <a class="category-link" href="/category/adobe/">Adobe</a></li>
+      </ul>
+      <div class="post-content" itemprop="articleBody">
+       <p>网上教程太多了已经分辨不出是谁原创的了，用自己的话写一遍</p>
+<p>新建白色背景画布</p>
+<p>新建图层“布纹颜色”，填充你想要的颜色</p>
+<p>新建图层“深色横纹”，填充白色</p>
+<p>选择“滤镜-杂色-添加杂色”，数量99%，平均分布，单色</p>
+<p>选择“滤镜-模糊-动感模糊”，角度0度，距离25像素</p>
+<p>更改图层混合模式为叠加，不透明度25%</p>
+<p>新建图层“深色竖纹”，和上面一样，不同的是把动感模糊角度设为90度</p>
+<p>新建图层“浅色横纹”和“浅色竖纹”，和上面一样，不同的是图层填充为黑色，把杂色数量变为101%，图层混合模式为滤色，透明度20%</p>
+<p>你会发现画布的边缘部分的效果和其他地方不一样，剪裁掉即可~</p>
+<p><img src="/images/2013/01/iphone.png" alt="iphone布纹"></p>
+
+       
+      </div>
+    </article>
+  
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+      <h2 class="post-title" itemprop="name headline"><a itemprop="url"  href="/post/auto-update-smarthost.html">C#:自动更新Smarthosts到本地hosts</a></h2>
+      <ul class="post-meta">
+        <li><span class="title">发表于：</span><time datetime="2012-12-26T10:28:00+08:00" itemprop="datePublished">2012-12-26</time></li>
+        <li><span class="title">分类：</span> <a class="category-link" href="/category/dotnet/">.NET</a></li>
+      </ul>
+      <div class="post-content" itemprop="articleBody">
+       
+        <p>SmartHosts 是一个托管在 googlecode 上的项目，定期更新 hosts 文件，你懂的。为了方便自动更新，不用每次都打开网站，于是尝试用 c# 实现了一下。</p>
+<p><strong>实现原理</strong></p>
+<p>从 <a target="_blank" rel="noopener" href="https://smarthosts.googlecode.com/svn/trunk/hosts">https://smarthosts.googlecode.com/svn/trunk/hosts</a> 抓取数据，写入本地 hosts。</p>
+<p><strong>实现步骤</strong></p>
+<p>1.抓取数据</p>
+<p>2.判断本地是否有 hosts 文件。没有则直接建立，并写入抓取下来的数据；有则读取</p>
+        <p class="more"><a class="btn" href="/post/auto-update-smarthost.html#more" rel="contents">- 阅读剩余部分 -</a></p>
+       
+      </div>
+    </article>
+  
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+      <h2 class="post-title" itemprop="name headline"><a itemprop="url"  href="/post/opera-extension-structure.html">Opera扩展:目录结构</a></h2>
+      <ul class="post-meta">
+        <li><span class="title">发表于：</span><time datetime="2012-12-20T11:30:00+08:00" itemprop="datePublished">2012-12-20</time></li>
+        <li><span class="title">分类：</span> <a class="category-link" href="/category/opera/">Opera</a></li>
+      </ul>
+      <div class="post-content" itemprop="articleBody">
+       
+        <p><strong>基本规则：</strong></p>
+<p>扩展必须有 <code>config.xml</code> 文件；</p>
+<p>扩展必须有一个在后台执行操作的文件（通常是一个 <code>index.html</code> 文件）；</p>
+<p>注入脚本必须放到 <code>includes</code> 文件夹下；</p>
+<p>所有文件必须打包进一个 zip 压缩包中，并将压缩包后缀名更改为 <code>.oex</code></p>
+        <p class="more"><a class="btn" href="/post/opera-extension-structure.html#more" rel="contents">- 阅读剩余部分 -</a></p>
+       
+      </div>
+    </article>
+  
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+      <h2 class="post-title" itemprop="name headline"><a itemprop="url"  href="/post/wordpress-get-category-data.html">Wordpress获取分类数据</a></h2>
+      <ul class="post-meta">
+        <li><span class="title">发表于：</span><time datetime="2012-12-17T21:49:00+08:00" itemprop="datePublished">2012-12-17</time></li>
+        <li><span class="title">分类：</span> <a class="category-link" href="/category/wordpress/">Wordpress</a></li>
+      </ul>
+      <div class="post-content" itemprop="articleBody">
+       
+        <p><strong>获取分类数据</strong></p>
+<p>根据文章ID获取文章分类数据:<code>get_the_category()</code></p>
+<p>根据分类别名获取分类数据:<code>get_category_by_slug()</code></p>
+<pre><code class="php">&lt;?php $cat = get_the_category($post_id);//返回数组,参数默认为当前文章ID ?&gt;
+&lt;?php $cat = get_category_by_slug($slug);//返回数组?&gt;
+</code></pre>
+<p>根据分类ID或分类对象获取分类数据:<code>get_category()</code></p>
+<pre><code class="php">&lt;?php $cat = get_category( $category,$output,$filter);?&gt;
+</code></pre>
+<pre><code class="php">&lt;?php
+$cat = get_category_by_slug($slug);//返回数组?&gt;
+&lt;?php
+$cat_id = $cat-&gt;term_id;//获取分类ID
+$cat_count = $cat-&gt;count;//获取分类文章数
+$cat_description = $cat-&gt;description;//获取分类描述
+$cat_slug = $cat-&gt;slug;//获取分类别名
+$cat_parent = $cat-&gt;parent;//获取分类父级引用
+ ?&gt;
+</code></pre>
+        <p class="more"><a class="btn" href="/post/wordpress-get-category-data.html#more" rel="contents">- 阅读剩余部分 -</a></p>
+       
+      </div>
+    </article>
+  
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+      <h2 class="post-title" itemprop="name headline"><a itemprop="url"  href="/post/wordpress-get_posts.html">Wordpress获取多篇文章:get_posts()</a></h2>
+      <ul class="post-meta">
+        <li><span class="title">发表于：</span><time datetime="2012-12-14T00:16:00+08:00" itemprop="datePublished">2012-12-14</time></li>
+        <li><span class="title">分类：</span> <a class="category-link" href="/category/wordpress/">Wordpress</a></li>
+      </ul>
+      <div class="post-content" itemprop="articleBody">
+       
+        <p><code>get_posts()</code> 用于在 WordPress 中提取多篇文章。</p>
+<p><strong>调用</strong></p>
+<pre><code class="php">&lt;?php $posts = get_posts($args); ?&gt;
+</code></pre>
+<p><strong>参数</strong></p>
+<pre><code class="php">&lt;?php
+$args = array(
+&#39;numberposts&#39; =&gt; 5,
+&#39;offset&#39; =&gt; 0,
+&#39;category&#39; =&gt; ,
+&#39;orderby&#39; =&gt; &#39;post_date&#39;,
+&#39;order&#39; =&gt; &#39;DESC&#39;,
+&#39;include&#39; =&gt; ,
+&#39;exclude&#39; =&gt; ,
+&#39;meta_key&#39; =&gt; ,
+&#39;meta_value&#39; =&gt; ,
+&#39;post_type&#39; =&gt; &#39;post&#39;,
+&#39;post_mime_type&#39; =&gt; ,
+&#39;post_parent&#39; =&gt; ,
+&#39;post_status&#39; =&gt; &#39;publish&#39; );
+?&gt;
+</code></pre>
+        <p class="more"><a class="btn" href="/post/wordpress-get_posts.html#more" rel="contents">- 阅读剩余部分 -</a></p>
+       
+      </div>
+    </article>
+  
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+      <h2 class="post-title" itemprop="name headline"><a itemprop="url"  href="/post/wordpress-wp_nav_menu.html">Wordpress导航菜单:wp_nav_menu()</a></h2>
+      <ul class="post-meta">
+        <li><span class="title">发表于：</span><time datetime="2012-12-14T00:08:00+08:00" itemprop="datePublished">2012-12-14</time></li>
+        <li><span class="title">分类：</span> <a class="category-link" href="/category/wordpress/">Wordpress</a></li>
+      </ul>
+      <div class="post-content" itemprop="articleBody">
+       
+        <p><strong>调用</strong></p>
+<p>在需要调用导航菜单的地方插入<code>&lt;?php wp_nav_menu($args);&gt;</code></p>
+<p><strong><code>wp_nav_menu($args)</code>函数中，参数<code>$args</code>的默认值</strong></p>
+<pre><code class="php">&lt;?php $defaults = array(
+&#39;theme_location&#39; =&gt; ,
+&#39;menu&#39; =&gt; ,
+&#39;container&#39; =&gt; &#39;div&#39;,
+&#39;container_class&#39; =&gt; &#39;menu-&#123;menu slug&#125;-container&#39;,
+&#39;container_id&#39; =&gt; ,
+&#39;menu_class&#39; =&gt; &#39;menu&#39;,
+&#39;menu_id&#39; =&gt; ,
+&#39;echo&#39; =&gt; true,
+&#39;fallback_cb&#39; =&gt; &#39;wp_page_menu&#39;,
+&#39;before&#39; =&gt; ,
+&#39;after&#39; =&gt; ,
+&#39;link_before&#39; =&gt; ,
+&#39;link_after&#39; =&gt; ,
+&#39;items_wrap&#39; =&gt; &#39;&lt;ul id=”%1$s” class=”%2$s”&gt;%3$s&lt;/ul&gt;&#39;,
+&#39;depth&#39; =&gt; 0,
+&#39;walker&#39; =&gt; );
+?&gt;
+</code></pre>
+        <p class="more"><a class="btn" href="/post/wordpress-wp_nav_menu.html#more" rel="contents">- 阅读剩余部分 -</a></p>
+       
+      </div>
+    </article>
+  
+  <div class="page-navigator"> <a class="extend prev" rel="prev" href="/page/7/">« 前一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/9/">后一页 »</a></div>
+</div>
+    <div id="secondary" role="complementary"><section class="widget">
+  <h3 class="widget-title">最新文章</h3>
+   <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/post/powershell-copy-item.html">PowerShell 教程：Copy-Item 复制文件和文件夹</a></li><li class="post-list-item"><a class="post-list-link" href="/post/zabbix-email-alert.html">Zabbix 教程：设置邮件报警</a></li><li class="post-list-item"><a class="post-list-link" href="/post/zabbix.html">Zabbix 介绍及使用教程</a></li><li class="post-list-item"><a class="post-list-link" href="/post/debian10-install-zabbix.html">腾讯云轻量服务器 Debian 10 安装 Zabbix 5.4</a></li><li class="post-list-item"><a class="post-list-link" href="/post/huawei-tc7102.html">华为 TC7102 电信定制版路由器接 ITV 机顶盒</a></li><li class="post-list-item"><a class="post-list-link" href="/post/synology.html">群晖折腾记</a></li></ul>
+</section>
+<section class="widget">
+  <h3 class="widget-title">分类</h3>
+   <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/category/dotnet/">.NET</a></li><li class="category-list-item"><a class="category-list-link" href="/category/adobe/">Adobe</a></li><li class="category-list-item"><a class="category-list-link" href="/category/bitcron/">Bitcron</a></li><li class="category-list-item"><a class="category-list-link" href="/category/farbox/">Farbox</a></li><li class="category-list-item"><a class="category-list-link" href="/category/office/">Office</a></li><li class="category-list-item"><a class="category-list-link" href="/category/opera/">Opera</a></li><li class="category-list-item"><a class="category-list-link" href="/category/wordpress/">Wordpress</a></li><li class="category-list-item"><a class="category-list-link" href="/category/code/">代码片段</a></li><li class="category-list-item"><a class="category-list-link" href="/category/develop/">有点技术</a></li><li class="category-list-item"><a class="category-list-link" href="/category/run/">科学上网</a></li><li class="category-list-item"><a class="category-list-link" href="/category/default/">闲言碎语</a></li></ul>
+</section>
+<section class="widget">
+  <h3 class="widget-title">标签</h3>
+  <div class="tagcloud"><a href="/tag/android/" style="font-size: 12.86px;">Android</a> <a href="/tag/csharp/" style="font-size: 17.14px;">C#</a> <a href="/tag/css/" style="font-size: 12.86px;">CSS</a> <a href="/tag/chrome/" style="font-size: 11.43px;">Chrome</a> <a href="/tag/dropbox/" style="font-size: 10px;">Dropbox</a> <a href="/tag/excel/" style="font-size: 15.71px;">Excel</a> <a href="/tag/google/" style="font-size: 12.86px;">Google</a> <a href="/tag/html5/" style="font-size: 14.29px;">Html5</a> <a href="/tag/javascript/" style="font-size: 15.71px;">JavaScript</a> <a href="/tag/JavaScript-Google/" style="font-size: 10px;">JavaScript,Google</a> <a href="/tag/Linux/" style="font-size: 14.29px;">Linux</a> <a href="/tag/markdown/" style="font-size: 11.43px;">Markdown</a> <a href="/tag/php/" style="font-size: 11.43px;">PHP</a> <a href="/tag/photoshop/" style="font-size: 11.43px;">Photoshop</a> <a href="/tag/powershell/" style="font-size: 11.43px;">PowerShell</a> <a href="/tag/windows/" style="font-size: 20px;">Windows</a> <a href="/tag/Zabbix/" style="font-size: 12.86px;">Zabbix</a> <a href="/tag/extension/" style="font-size: 18.57px;">扩展</a> <a href="/tag/%E6%A8%A1%E6%9D%BF/" style="font-size: 12.86px;">模板</a> <a href="/tag/template/" style="font-size: 20px;">模版</a> <a href="/tag/network/" style="font-size: 12.86px;">网络</a></div>
+</section>
+<section class="widget">
+  <h3 class="widget-title">归档</h3>
+  <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">2021 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">2021 年 07 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">2020 年 12 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">2020 年 09 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">2020 年 05 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">2020 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">2019 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">2019 年 07 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">2019 年 06 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">2019 年 01 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">2018 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">2018 年 07 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">2018 年 06 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">2018 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">2017 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">2017 年 05 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">2017 年 04 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">2017 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">2017 年 02 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">2016 年 10 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">2016 年 09 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">2016 年 05 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">2015 年 12 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">2015 年 11 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">2015 年 09 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">2014 年 10 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">2014 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">2014 年 02 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">2014 年 01 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">2013 年 12 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">2013 年 09 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">2013 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">2013 年 07 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">2013 年 06 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">2013 年 05 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">2013 年 04 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/02/">2013 年 02 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/01/">2013 年 01 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">2012 年 12 月</a></li></ul>
+</section></div><!-- end #sidebar -->
+  </div>
+</div><!-- end #body -->
+<footer id="footer">&copy; 2012-2022 <a href="https://0x400.net">0x400</a></footer><!-- end #footer -->
+<script type="text/javascript" src="/highlight.min.js"></script>
+<script>
+hljs.highlightAll();            
+</script>
+<script type="text/javascript" src="/highlightjs-line-numbers.min.js"></script>
+<script>
+hljs.initLineNumbersOnLoad();            
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id='UA-115734355-1"></script>
+<script>
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
+ gtag('config', 'UA-115734355-1');
+</script>
+</body>
+</html>

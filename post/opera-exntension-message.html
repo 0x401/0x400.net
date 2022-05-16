@@ -1,0 +1,191 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="renderer" content="webkit">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Opera扩展:消息 - 0x400</title>
+  
+
+
+
+
+ 
+ 
+  
+  
+  
+ 
+ 
+  
+ 
+
+
+
+ 
+
+<meta name="keywords" content="扩展,JavaScript,0x400,Vivaldi,Google" />
+
+
+
+
+
+<meta name="decription" content="Opera 扩展包括有“后台脚本”、“注入脚本”、“弹窗脚本”等，所谓“消息”，各脚本间的数据传递就是通过消息实现的。
+Opera 扩展发送消息的方式有3种，postMessage()&#x2F;broadcast..." />
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    body{
+      background:url( https://www.bing.com/th?id=OHR.WindmillDay_EN-US5180406924_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp) fixed center  no-repeat;
+      background-size: cover;
+    }
+  </style>
+<meta name="generator" content="Hexo 6.2.0"></head>
+<body>
+<header id="header">
+  <div class="container">
+    <div class="site-name">
+      <a id="logo" href="https://0x400.net"><img src="/logo.jpg" alt="0x400"/></a> 
+      <h1>0x400</h1>
+    </div>
+    <nav>
+    <a href="https://0x400.net">首页</a>
+    
+    <a class="current title" href="/post/opera-exntension-message.html">
+    Opera扩展:消息
+    
+    </a>
+    
+   </nav>
+  </div>
+</header><!-- end #header -->
+<div id="body">
+  <div class="container">
+    <div id="main" role="main">
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <h1 class="post-title" itemprop="name headline"><a itemprop="url"  href="/post/opera-exntension-message.html">Opera扩展:消息</a></h1>
+  <ul class="post-meta">
+    <li><span class="title">发表于：</span>
+      <time datetime="2013-02-07T13:04:00+08:00" itemprop="datePublished">2013-02-07</time>
+    </li>
+    <li><span class="title">更新于：</span>
+      <time datetime="2022-05-16T14:12:05+08:00" itemprop="dateModified">2022-05-16</time>
+    </li>
+    <li><span class="title">分类：</span> <a class="category-link" href="/category/opera/">Opera</a></li>
+  </ul>
+  <div class="post-content" itemprop="articleBody">
+    <p>Opera 扩展包括有“后台脚本”、“注入脚本”、“弹窗脚本”等，所谓“消息”，各脚本间的数据传递就是通过消息实现的。</p>
+<p>Opera 扩展发送消息的方式有3种，<code>postMessage()</code>&#x2F;<code>broadcastMessage()</code>&#x2F;消息通道。</p>
+<p>例如<strong>在后台脚本和注入脚本之间传递数据:</strong></p>
+<p>可以使用 <code>broadcastMessage()</code> 来发送消息。你可以在后台脚本中这样写:</p>
+<pre><code class="javascript">opera.extension.broadcastMessage(&quot;Hello there&quot;);
+</code></pre>
+<span id="more"></span>
+
+<p>注入脚本需要接收消息，像这样:</p>
+<pre><code class="javascript">var thecatch;
+opera.extension.onmessage = function(event)&#123;
+thecatch = event.data; // event.data 在这个实例中将包含字符串 &quot;Hello there&quot;
+&#125;
+</code></pre>
+<p>需要注意的是，broadcastMessage() 方法会将消息发送到所有的注入脚本，例如你让注入脚本改变网页的字体，那么浏览器所有包含注入脚本的标签页都会改变。如果想只对一个注入脚本发消息应该使用 postMessage() 或者“消息通道”。</p>
+<p><strong>在后台脚本和弹窗脚本之间传递数据:</strong></p>
+<p>后台脚本和弹窗脚本之间传递实际上和后台脚本和注入脚本之间传递数据是一样的。</p>
+<p><strong>在注入脚本和弹窗脚本之间传递数据:</strong></p>
+<p>注入脚本和弹窗脚本无法直接传递数据，而需要一个专有的“消息通道(MessageChannel)”来通信，这个消息通道是由注入脚本建立的，并且需要后台脚本把这个消息通道告诉给弹窗脚本，然后弹窗脚本就能和注入脚本通过这个消息通道直接通信了。</p>
+<p>过程是这样：</p>
+<p>1.注入脚本发消息给后台脚本</p>
+<p>2.后台脚本发消息给弹窗脚本</p>
+<p>3.弹窗脚本和注入脚本建立连接，可直接传递数据了</p>
+<p>首先,我们有一个叫 port 的全局变量,晚些的时候会用到.让我们看到 onconnect 事件这里:</p>
+<pre><code class="javascript">opera.extension.onconnect = function( event )&#123;
+if( port )
+event.source.postMessage( &quot;响应通道&quot;, [port] );
+&#125;
+</code></pre>
+<p><strong>详细过程：</strong></p>
+<p>注入脚本载入时创建一个新的消息通道.一个消息通道将包含两个端口来收发消息.在这里,我们确保确保第2个端口发送数据,第1个端口收数据.然后我们使用<code>postMessage()</code>通过这个消息通道发送给后台脚本</p>
+<pre><code class="javascript">var channel = new MessageChannel();
+opera.extension.postMessage( &quot;我通过这个消息通道发消息&quot;, [channel.port2] );
+</code></pre>
+<p>这时，后台脚本接收到了注入脚本的消息–注入脚的消息通道，存储到变量 port 中</p>
+<pre><code class="javascript">opera.extension.onmessage = function( event ) &#123;
+if (event.ports)
+port = event.ports[0];
+&#125;
+</code></pre>
+<p>当弹窗脚本载入后，后台脚本给它发送消息:</p>
+<pre><code class="javascript">opera.extension.onconnect = function( event )&#123;
+if( port )&#123;
+event.source.postMessage( &quot;Respond to the port&quot;, [port] );
+&#125;
+&#125;
+</code></pre>
+<p>然而,这次,port变量的值不在是空的.它包含了注入脚本第2个通道的引用。</p>
+<p>这时弹窗脚本接受到了后台脚本的消息–注入脚本的消息通道。所以可以通过消息通道给注入脚本发消息了:</p>
+<pre><code class="javascript">opera.extension.onmessage = function( event )&#123;
+if( event.ports )&#123;
+event.ports[0].postMessage( &quot;Hi from popups side!&quot; );
+&#125;
+&#125;
+</code></pre>
+<p>同时，注入脚本也可以通过这个通道接受后台脚本的消息了:</p>
+<pre><code class="javascript">channel.port1.onmessage = function( event )&#123;
+opera.postError(&quot;Here is what i got in the injected script for port1: &quot; + event.data);
+&#125;
+</code></pre>
+<p>这里,注入脚本监听消息通道的port1端口.当接收到消息的时候,那么发送一个包含了来自弹窗脚本消息的句子到错误控制台.</p>
+<p>概述,下列的事情发生了:</p>
+<p>注入脚本载入</p>
+<p>在后台脚本中, onconnect 事件被触发,发送消息到注入脚本</p>
+<p>注入脚本收到消息然后设置一个消息通道</p>
+<p>注入脚本使用第2个端口发送消息到后台脚本</p>
+<p>后台脚本监听消息,但更重要的是保存这个端口的引用</p>
+<p>现在弹窗脚本连接后台脚本</p>
+<p>后台脚本中的onconnect的事件再次被触发,这次使用从注入脚本接收消息的端口发送消息.</p>
+<p>弹窗端口监听消息,检查消息是否有一个端口的引用(是否是通过端口发送过来的).如果是,发送自己的消息到这个端口(这个端口是消息通道的 port2)</p>
+<p>注入脚本的消息通道监听消息!将收到的消息写入到错误控制台.</p>
+<p>在这种情况下,后台脚本就是媒人,首先媒人找到第一个人(注入脚本).第一个人给出他的编号(第2个端口)给媒人,媒人记下这个.然后另外一个人(弹窗脚本)联系到媒人:媒人立刻发送第一个人(注入脚本)的编号给第2个人(弹窗脚本).现在两个人可以直接进行那个更详细的交谈了.而不需要媒人(后台脚本)了.</p>
+ 
+  </div>
+  
+  <p>标签：<a class="tag--link" href="/tag/javascript/" rel="tag">JavaScript</a>, <a class="tag--link" href="/tag/extension/" rel="tag">扩展</a><p>
+  
+</article>
+</div>
+    <div id="secondary" role="complementary"><section class="widget">
+  <h3 class="widget-title">最新文章</h3>
+   <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/post/powershell-copy-item.html">PowerShell 教程：Copy-Item 复制文件和文件夹</a></li><li class="post-list-item"><a class="post-list-link" href="/post/zabbix-email-alert.html">Zabbix 教程：设置邮件报警</a></li><li class="post-list-item"><a class="post-list-link" href="/post/zabbix.html">Zabbix 介绍及使用教程</a></li><li class="post-list-item"><a class="post-list-link" href="/post/debian10-install-zabbix.html">腾讯云轻量服务器 Debian 10 安装 Zabbix 5.4</a></li><li class="post-list-item"><a class="post-list-link" href="/post/huawei-tc7102.html">华为 TC7102 电信定制版路由器接 ITV 机顶盒</a></li><li class="post-list-item"><a class="post-list-link" href="/post/synology.html">群晖折腾记</a></li></ul>
+</section>
+<section class="widget">
+  <h3 class="widget-title">分类</h3>
+   <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/category/dotnet/">.NET</a></li><li class="category-list-item"><a class="category-list-link" href="/category/adobe/">Adobe</a></li><li class="category-list-item"><a class="category-list-link" href="/category/bitcron/">Bitcron</a></li><li class="category-list-item"><a class="category-list-link" href="/category/farbox/">Farbox</a></li><li class="category-list-item"><a class="category-list-link" href="/category/office/">Office</a></li><li class="category-list-item"><a class="category-list-link" href="/category/opera/">Opera</a></li><li class="category-list-item"><a class="category-list-link" href="/category/wordpress/">Wordpress</a></li><li class="category-list-item"><a class="category-list-link" href="/category/code/">代码片段</a></li><li class="category-list-item"><a class="category-list-link" href="/category/develop/">有点技术</a></li><li class="category-list-item"><a class="category-list-link" href="/category/run/">科学上网</a></li><li class="category-list-item"><a class="category-list-link" href="/category/default/">闲言碎语</a></li></ul>
+</section>
+<section class="widget">
+  <h3 class="widget-title">标签</h3>
+  <div class="tagcloud"><a href="/tag/android/" style="font-size: 12.86px;">Android</a> <a href="/tag/csharp/" style="font-size: 17.14px;">C#</a> <a href="/tag/css/" style="font-size: 12.86px;">CSS</a> <a href="/tag/chrome/" style="font-size: 11.43px;">Chrome</a> <a href="/tag/dropbox/" style="font-size: 10px;">Dropbox</a> <a href="/tag/excel/" style="font-size: 15.71px;">Excel</a> <a href="/tag/google/" style="font-size: 12.86px;">Google</a> <a href="/tag/html5/" style="font-size: 14.29px;">Html5</a> <a href="/tag/javascript/" style="font-size: 15.71px;">JavaScript</a> <a href="/tag/JavaScript-Google/" style="font-size: 10px;">JavaScript,Google</a> <a href="/tag/Linux/" style="font-size: 14.29px;">Linux</a> <a href="/tag/markdown/" style="font-size: 11.43px;">Markdown</a> <a href="/tag/php/" style="font-size: 11.43px;">PHP</a> <a href="/tag/photoshop/" style="font-size: 11.43px;">Photoshop</a> <a href="/tag/powershell/" style="font-size: 11.43px;">PowerShell</a> <a href="/tag/windows/" style="font-size: 20px;">Windows</a> <a href="/tag/Zabbix/" style="font-size: 12.86px;">Zabbix</a> <a href="/tag/extension/" style="font-size: 18.57px;">扩展</a> <a href="/tag/%E6%A8%A1%E6%9D%BF/" style="font-size: 12.86px;">模板</a> <a href="/tag/template/" style="font-size: 20px;">模版</a> <a href="/tag/network/" style="font-size: 12.86px;">网络</a></div>
+</section>
+<section class="widget">
+  <h3 class="widget-title">归档</h3>
+  <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">2021 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">2021 年 07 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">2020 年 12 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">2020 年 09 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">2020 年 05 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">2020 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">2019 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">2019 年 07 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">2019 年 06 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">2019 年 01 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">2018 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">2018 年 07 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">2018 年 06 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">2018 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">2017 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">2017 年 05 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">2017 年 04 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">2017 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">2017 年 02 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">2016 年 10 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">2016 年 09 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">2016 年 05 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">2015 年 12 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">2015 年 11 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">2015 年 09 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">2014 年 10 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">2014 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">2014 年 02 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">2014 年 01 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">2013 年 12 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">2013 年 09 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">2013 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">2013 年 07 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">2013 年 06 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">2013 年 05 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">2013 年 04 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/02/">2013 年 02 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/01/">2013 年 01 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">2012 年 12 月</a></li></ul>
+</section></div><!-- end #sidebar -->
+  </div>
+</div><!-- end #body -->
+<footer id="footer">&copy; 2012-2022 <a href="https://0x400.net">0x400</a></footer><!-- end #footer -->
+<script type="text/javascript" src="/highlight.min.js"></script>
+<script>
+hljs.highlightAll();            
+</script>
+<script type="text/javascript" src="/highlightjs-line-numbers.min.js"></script>
+<script>
+hljs.initLineNumbersOnLoad();            
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id='UA-115734355-1"></script>
+<script>
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
+ gtag('config', 'UA-115734355-1');
+</script>
+</body>
+</html>

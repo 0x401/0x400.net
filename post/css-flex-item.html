@@ -1,0 +1,129 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="renderer" content="webkit">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Flex 布局：项目的属性 - 0x400</title>
+  
+
+
+
+
+ 
+ 
+  
+  
+  
+ 
+ 
+  
+ 
+
+
+
+ 
+
+<meta name="keywords" content="CSS,Html5,0x400,Vivaldi,Google" />
+
+
+
+
+
+<meta name="decription" content="Flex 容器内的子元素叫做容器的项目（item），通过设置 Flex 容器的 CSS 可以统一设置项目的排列顺序和对齐方式，通过项目的 CSS 则可以控制单个项目的缩放、排列顺序、对齐方式等。
+orderorde..." />
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    body{
+      background:url( https://www.bing.com/th?id=OHR.WindmillDay_EN-US5180406924_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp) fixed center  no-repeat;
+      background-size: cover;
+    }
+  </style>
+<meta name="generator" content="Hexo 6.2.0"></head>
+<body>
+<header id="header">
+  <div class="container">
+    <div class="site-name">
+      <a id="logo" href="https://0x400.net"><img src="/logo.jpg" alt="0x400"/></a> 
+      <h1>0x400</h1>
+    </div>
+    <nav>
+    <a href="https://0x400.net">首页</a>
+    
+    <a class="current title" href="/post/css-flex-item.html">
+    Flex 布局：项目的属性
+    
+    </a>
+    
+   </nav>
+  </div>
+</header><!-- end #header -->
+<div id="body">
+  <div class="container">
+    <div id="main" role="main">
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <h1 class="post-title" itemprop="name headline"><a itemprop="url"  href="/post/css-flex-item.html">Flex 布局：项目的属性</a></h1>
+  <ul class="post-meta">
+    <li><span class="title">发表于：</span>
+      <time datetime="2019-08-21T15:38:00+08:00" itemprop="datePublished">2019-08-21</time>
+    </li>
+    <li><span class="title">更新于：</span>
+      <time datetime="2022-05-16T14:12:04+08:00" itemprop="dateModified">2022-05-16</time>
+    </li>
+    <li><span class="title">分类：</span> <a class="category-link" href="/category/develop/">有点技术</a></li>
+  </ul>
+  <div class="post-content" itemprop="articleBody">
+    <p>Flex 容器内的子元素叫做容器的项目（item），通过设置 <a href="https://0x400.net/post/css-flex-container.html">Flex 容器的 CSS</a> 可以统一设置项目的排列顺序和对齐方式，通过项目的 CSS 则可以控制单个项目的缩放、排列顺序、对齐方式等。</p>
+<h2 id="order"><a href="#order" class="headerlink" title="order"></a>order</h2><p><code>order</code>，设置 item 的排列优先级，默认为<code>0</code>，数字小越先排列，可为负。<br>如下图，a 方块<code>order:1</code>，所以排到了最后。<br><img src="/images/2019/08/1064156392.png" alt="item-order.png"></p>
+<span id="more"></span>
+<h2 id="flex-grow"><a href="#flex-grow" class="headerlink" title="flex-grow"></a>flex-grow</h2><p>当容器主轴有剩余空间时，通过<code>flex-grow</code>来设置 item 分配剩余空间的比例，默认为<code>0</code>，表示不分配，效果就是项目保持原来的尺寸。<br>如果其中一个 item 的值为<code>1</code>其他 item 值为<code>0</code>，值为<code>1</code>的会填满剩余的空间。<br>如果有一个为<code>1</code>，两个为<code>2</code>，一个为<code>0</code>,那么剩余空间平均分为五份，为<code>1</code>的占五分之一，为<code>2</code>的各占五分之二。</p>
+<p>如下图，容器的宽度为 500px，容器内每个项目的宽度为 100px，此时容器剩余宽度为<code>100px</code>，flex-grow 的比例为<code>1:2:2</code>，按照比例将给 a 分配剩余宽度的五分之一，也就是<code>20px</code>，最终 a 的宽度变成了<code>120px</code>,同理 b 和 c 的宽度变成了<code>140px</code>。<br><img src="/images/2019/08/2755932528.png" alt="item-grow.png"></p>
+<h2 id="flex-shrink"><a href="#flex-shrink" class="headerlink" title="flex-shrink"></a>flex-shrink</h2><p>当容器主轴空间不足时，通过<code>flex-shrink</code>来设置 item 需要减去空间的比例，默认为<code>1</code>，表示减去的空间比例为 item 宽或高的比例。<br>也就是说，最终减去的比例是 flex-shrink 值的比例乘以 item 本身宽或高的比例。</p>
+<p>例如下图 a、b、c 三个都需要减小，flex-shrink 比例为<code>2:1:1</code>，它们宽度的比也是<code>2:1:1</code>，所以最终比例<code>4:1:1</code>。<br>item 总宽度超出了<code>200px</code>，按照比例 a 将减去<code>200px</code>的六分之四，也就是<code>133.33px</code>，最终 a 的宽度变成了<code>66.66px</code>，b 和 c 都减去<code>200px</code>的六分之一，也就是<code>33.33px</code>，最终宽度变成了<code>66.66px</code>。<br><img src="/images/2019/08/1281536177.jpg" alt="item-shrink.jpg"></p>
+<h2 id="flex-basis"><a href="#flex-basis" class="headerlink" title="flex-basis"></a>flex-basis</h2><p><code>flex-basis</code>，设置 item 在主轴上占据的空间，当设置<code>flex-direction:row</code>时，效果是重写了 item 的宽，当设置<code>flex-direction:column</code>时，效果则是重写了 item 的高。</p>
+<h2 id="flex"><a href="#flex" class="headerlink" title="flex"></a>flex</h2><p><code>flex</code>是<code>flex-grow</code>、<code>flex-shrink</code>、<code>flex-basis</code>的缩写，默认<code>0 1 auto</code>对应前面三个属性的默认值。<br>另外<code>auto</code>等于<code>1 1 auto</code>，项目会伸长填充容器也会缩短适应容器，<code>none</code>等于<code>0 0 auto</code>，既不会伸长也不会缩短。</p>
+<h2 id="align-self"><a href="#align-self" class="headerlink" title="align-self"></a>align-self</h2><p><code>align-self</code>，设置 item 在交叉轴上的对齐方式，覆盖容器里的<code>align-items</code>，达到单独设置某个项目交叉轴上对齐方式的效果。<br>如下图，单独设置了 a 方块<code>align-self:flex-start</code>，所以 a 方块单独对齐到了交叉轴的起点。<br><img src="/images/2019/08/896439640.jpg" alt="item-self.jpg"></p>
+ 
+  </div>
+  
+  <p>标签：<a class="tag--link" href="/tag/css/" rel="tag">CSS</a>, <a class="tag--link" href="/tag/html5/" rel="tag">Html5</a><p>
+  
+</article>
+</div>
+    <div id="secondary" role="complementary"><section class="widget">
+  <h3 class="widget-title">最新文章</h3>
+   <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/post/powershell-copy-item.html">PowerShell 教程：Copy-Item 复制文件和文件夹</a></li><li class="post-list-item"><a class="post-list-link" href="/post/zabbix-email-alert.html">Zabbix 教程：设置邮件报警</a></li><li class="post-list-item"><a class="post-list-link" href="/post/zabbix.html">Zabbix 介绍及使用教程</a></li><li class="post-list-item"><a class="post-list-link" href="/post/debian10-install-zabbix.html">腾讯云轻量服务器 Debian 10 安装 Zabbix 5.4</a></li><li class="post-list-item"><a class="post-list-link" href="/post/huawei-tc7102.html">华为 TC7102 电信定制版路由器接 ITV 机顶盒</a></li><li class="post-list-item"><a class="post-list-link" href="/post/synology.html">群晖折腾记</a></li></ul>
+</section>
+<section class="widget">
+  <h3 class="widget-title">分类</h3>
+   <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/category/dotnet/">.NET</a></li><li class="category-list-item"><a class="category-list-link" href="/category/adobe/">Adobe</a></li><li class="category-list-item"><a class="category-list-link" href="/category/bitcron/">Bitcron</a></li><li class="category-list-item"><a class="category-list-link" href="/category/farbox/">Farbox</a></li><li class="category-list-item"><a class="category-list-link" href="/category/office/">Office</a></li><li class="category-list-item"><a class="category-list-link" href="/category/opera/">Opera</a></li><li class="category-list-item"><a class="category-list-link" href="/category/wordpress/">Wordpress</a></li><li class="category-list-item"><a class="category-list-link" href="/category/code/">代码片段</a></li><li class="category-list-item"><a class="category-list-link" href="/category/develop/">有点技术</a></li><li class="category-list-item"><a class="category-list-link" href="/category/run/">科学上网</a></li><li class="category-list-item"><a class="category-list-link" href="/category/default/">闲言碎语</a></li></ul>
+</section>
+<section class="widget">
+  <h3 class="widget-title">标签</h3>
+  <div class="tagcloud"><a href="/tag/android/" style="font-size: 12.86px;">Android</a> <a href="/tag/csharp/" style="font-size: 17.14px;">C#</a> <a href="/tag/css/" style="font-size: 12.86px;">CSS</a> <a href="/tag/chrome/" style="font-size: 11.43px;">Chrome</a> <a href="/tag/dropbox/" style="font-size: 10px;">Dropbox</a> <a href="/tag/excel/" style="font-size: 15.71px;">Excel</a> <a href="/tag/google/" style="font-size: 12.86px;">Google</a> <a href="/tag/html5/" style="font-size: 14.29px;">Html5</a> <a href="/tag/javascript/" style="font-size: 15.71px;">JavaScript</a> <a href="/tag/JavaScript-Google/" style="font-size: 10px;">JavaScript,Google</a> <a href="/tag/Linux/" style="font-size: 14.29px;">Linux</a> <a href="/tag/markdown/" style="font-size: 11.43px;">Markdown</a> <a href="/tag/php/" style="font-size: 11.43px;">PHP</a> <a href="/tag/photoshop/" style="font-size: 11.43px;">Photoshop</a> <a href="/tag/powershell/" style="font-size: 11.43px;">PowerShell</a> <a href="/tag/windows/" style="font-size: 20px;">Windows</a> <a href="/tag/Zabbix/" style="font-size: 12.86px;">Zabbix</a> <a href="/tag/extension/" style="font-size: 18.57px;">扩展</a> <a href="/tag/%E6%A8%A1%E6%9D%BF/" style="font-size: 12.86px;">模板</a> <a href="/tag/template/" style="font-size: 20px;">模版</a> <a href="/tag/network/" style="font-size: 12.86px;">网络</a></div>
+</section>
+<section class="widget">
+  <h3 class="widget-title">归档</h3>
+  <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">2021 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">2021 年 07 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">2020 年 12 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">2020 年 09 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">2020 年 05 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">2020 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">2019 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">2019 年 07 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">2019 年 06 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">2019 年 01 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">2018 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">2018 年 07 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">2018 年 06 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">2018 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">2017 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">2017 年 05 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">2017 年 04 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">2017 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">2017 年 02 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">2016 年 10 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">2016 年 09 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">2016 年 05 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">2015 年 12 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">2015 年 11 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">2015 年 09 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">2014 年 10 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">2014 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">2014 年 02 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">2014 年 01 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">2013 年 12 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">2013 年 09 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">2013 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">2013 年 07 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">2013 年 06 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">2013 年 05 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">2013 年 04 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/02/">2013 年 02 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/01/">2013 年 01 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">2012 年 12 月</a></li></ul>
+</section></div><!-- end #sidebar -->
+  </div>
+</div><!-- end #body -->
+<footer id="footer">&copy; 2012-2022 <a href="https://0x400.net">0x400</a></footer><!-- end #footer -->
+<script type="text/javascript" src="/highlight.min.js"></script>
+<script>
+hljs.highlightAll();            
+</script>
+<script type="text/javascript" src="/highlightjs-line-numbers.min.js"></script>
+<script>
+hljs.initLineNumbersOnLoad();            
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id='UA-115734355-1"></script>
+<script>
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
+ gtag('config', 'UA-115734355-1');
+</script>
+</body>
+</html>

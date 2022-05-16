@@ -1,0 +1,147 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="renderer" content="webkit">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Excel 基础：文件格式、工作簿、工作表、单元格 - 0x400</title>
+  
+
+
+
+
+ 
+ 
+  
+ 
+
+
+
+ 
+
+<meta name="keywords" content="Excel,0x400,Vivaldi,Google" />
+
+
+
+
+
+<meta name="decription" content="文件格式.xls和.xlsx是 Excel 表格文件的默认格式。.xls是 Excel 2007 以前默认的格式，.xlsx则是 Excel 2007 开始的默认格式。
+这两种格式文件最大的两个区别有两点：
+
+同样..." />
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    body{
+      background:url( https://www.bing.com/th?id=OHR.WindmillDay_EN-US5180406924_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp) fixed center  no-repeat;
+      background-size: cover;
+    }
+  </style>
+<meta name="generator" content="Hexo 6.2.0"></head>
+<body>
+<header id="header">
+  <div class="container">
+    <div class="site-name">
+      <a id="logo" href="https://0x400.net"><img src="/logo.jpg" alt="0x400"/></a> 
+      <h1>0x400</h1>
+    </div>
+    <nav>
+    <a href="https://0x400.net">首页</a>
+    
+    <a class="current title" href="/post/excel001.html">
+    Excel 基础：文件格式、工作簿、工作表、单元格
+    
+    </a>
+    
+   </nav>
+  </div>
+</header><!-- end #header -->
+<div id="body">
+  <div class="container">
+    <div id="main" role="main">
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <h1 class="post-title" itemprop="name headline"><a itemprop="url"  href="/post/excel001.html">Excel 基础：文件格式、工作簿、工作表、单元格</a></h1>
+  <ul class="post-meta">
+    <li><span class="title">发表于：</span>
+      <time datetime="2019-07-13T16:12:00+08:00" itemprop="datePublished">2019-07-13</time>
+    </li>
+    <li><span class="title">更新于：</span>
+      <time datetime="2022-05-16T14:12:04+08:00" itemprop="dateModified">2022-05-16</time>
+    </li>
+    <li><span class="title">分类：</span> <a class="category-link" href="/category/office/">Office</a></li>
+  </ul>
+  <div class="post-content" itemprop="articleBody">
+    <h2 id="文件格式"><a href="#文件格式" class="headerlink" title="文件格式"></a>文件格式</h2><p><code>.xls</code>和<code>.xlsx</code>是 Excel 表格文件的默认格式。<br><code>.xls</code>是 Excel 2007 以前默认的格式，<code>.xlsx</code>则是 Excel 2007 开始的默认格式。</p>
+<p>这两种格式文件最大的两个区别有两点：</p>
+<ol>
+<li>同样内容的表格，<code>.xlsx</code>文件更小；</li>
+<li><code>.xls</code>最多支持 66535 行数据，<code>.xlsx</code>最多支持 1048576 行数据</li>
+</ol>
+<p>还有另一个常用的格式<code>.csv</code>，这种格式只能记录文本内容，无法保存字体、颜色、合并单元格等信息。<br>##工作簿、工作表<br>一个表格文件被 Excel 叫做<strong>工作簿</strong>（Workbook）,工作簿里可以有多个<strong>工作表</strong>（Worksheet）。<br>为了方便管理，可以将内容相关的表格放到同一个工作簿里不同的工作表中。</p>
+<p>如下图，是一个名为“工作记录”的文件，按月份命名了每个工作表，在工作表名称上右键可以<strong>重命名</strong>，通过<strong>移动或复制</strong>功能，也可将工作表移动或复制到单独的文件里，<br>通过<strong>保护工作表</strong>功能，可以对单个工作表设置密码，使其他人无法修改内容。<br>右下角可以调整缩放比例，方便查看内容。</p>
+<span id="more"></span>
+<p><img src="/images/2019/06/20190713160834.jpg"><br>##单元格<br>工作表里的格子即为单元格（Cell）。</p>
+<ul>
+<li><code>单击</code>可选中单个单元格</li>
+<li>按住<code>Ctrl</code>键，然后<code>单击</code>，可选中（或取消选中）多个不连续需的单元格</li>
+<li><code>拖动</code>可选中一片区域</li>
+<li>按住<code>Ctrl</code>键，然后<code>拖动</code>，可选中（或取消选中）多个不连续的区域</li>
+<li>按住<code>Shift</code>键，然后<code>单击</code>，可快速选中一片区域</li>
+</ul>
+<p>如下图，<strong>单击</strong>选中单元格，然后复制、剪切等操作，可以将单元格的所有信息（内容，字体、颜色等所有格式信息）都粘贴到其他单元格，<br>粘贴后右下角会出现一个按钮，点开可选择只粘贴格式或只粘贴文本等。<br><strong>双击</strong>进入单元格，然后选中文字，复制、粘贴等则只是对文本的操作。<br><img src="/images/2019/06/363660412.gif" alt="cell.gif"><br>##行、列<br>A、B、C、D、……为行号，1、2、3、4、……为列号，</p>
+<ul>
+<li><code>单击</code>列号可选中整列</li>
+<li>按住<code>Ctrl</code>键，然后<code>单击</code>列号，可选中（或取消选中）多个不连续的列</li>
+<li>在列号上<code>拖动</code>可选中连续的列</li>
+<li>按住<code>Ctrl</code>键，然后在列号上<code>拖动</code>，可选中（或取消选中）多个不连续的列</li>
+<li>按住<code>Shift</code>键，然后<code>单击</code>，可快速选中连续的列</li>
+</ul>
+<p>同样的方法作也适用于行。</p>
+<p>如下图，在列号之间拖动可调整列宽，列号之间双击可根据列的内容自动调整列宽。<br>也可选中多列进行操作，同样的方法也适合于调整行高。<br><img src="/images/2019/06/3320402662.gif" alt="size.gif"></p>
+<p>如下图，选中一列，鼠标放到列号下边会变成<strong>十字箭头</strong>，此时按住<code>Shift</code>键，拖动到其他列<strong>右侧</strong>，可以交换两列的数据。<br>选中连续的列然后操作也可交换连续列的数据，同样的方法也适用于行。<br><img src="/images/2019/06/3269703574.gif" alt="col.gif"></p>
+<h2 id="区域"><a href="#区域" class="headerlink" title="区域"></a>区域</h2><p>Excel 会根据单元格是否有内容将单元格划分到不同的区域（Range）。</p>
+<p>如下图，在不同的单元格按<code>Ctrl+A</code>会选中不同的区域。<br><img src="/images/2019/06/1188242335.gif" alt="range.gif"></p>
+<p>如下图，按住<code>Ctrl</code>键，然后按<code>方向键</code>，可跳转到区域的边缘位置。<br>日常使用中，可用此这个方法可以快速跳转到数据的最后一行或最后一列。<br><img src="/images/2019/06/2564644132.gif" alt="range2.gif"></p>
+ 
+  </div>
+  
+  <p>标签：<a class="tag--link" href="/tag/excel/" rel="tag">Excel</a><p>
+  
+</article>
+</div>
+    <div id="secondary" role="complementary"><section class="widget">
+  <h3 class="widget-title">最新文章</h3>
+   <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/post/powershell-copy-item.html">PowerShell 教程：Copy-Item 复制文件和文件夹</a></li><li class="post-list-item"><a class="post-list-link" href="/post/zabbix-email-alert.html">Zabbix 教程：设置邮件报警</a></li><li class="post-list-item"><a class="post-list-link" href="/post/zabbix.html">Zabbix 介绍及使用教程</a></li><li class="post-list-item"><a class="post-list-link" href="/post/debian10-install-zabbix.html">腾讯云轻量服务器 Debian 10 安装 Zabbix 5.4</a></li><li class="post-list-item"><a class="post-list-link" href="/post/huawei-tc7102.html">华为 TC7102 电信定制版路由器接 ITV 机顶盒</a></li><li class="post-list-item"><a class="post-list-link" href="/post/synology.html">群晖折腾记</a></li></ul>
+</section>
+<section class="widget">
+  <h3 class="widget-title">分类</h3>
+   <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/category/dotnet/">.NET</a></li><li class="category-list-item"><a class="category-list-link" href="/category/adobe/">Adobe</a></li><li class="category-list-item"><a class="category-list-link" href="/category/bitcron/">Bitcron</a></li><li class="category-list-item"><a class="category-list-link" href="/category/farbox/">Farbox</a></li><li class="category-list-item"><a class="category-list-link" href="/category/office/">Office</a></li><li class="category-list-item"><a class="category-list-link" href="/category/opera/">Opera</a></li><li class="category-list-item"><a class="category-list-link" href="/category/wordpress/">Wordpress</a></li><li class="category-list-item"><a class="category-list-link" href="/category/code/">代码片段</a></li><li class="category-list-item"><a class="category-list-link" href="/category/develop/">有点技术</a></li><li class="category-list-item"><a class="category-list-link" href="/category/run/">科学上网</a></li><li class="category-list-item"><a class="category-list-link" href="/category/default/">闲言碎语</a></li></ul>
+</section>
+<section class="widget">
+  <h3 class="widget-title">标签</h3>
+  <div class="tagcloud"><a href="/tag/android/" style="font-size: 12.86px;">Android</a> <a href="/tag/csharp/" style="font-size: 17.14px;">C#</a> <a href="/tag/css/" style="font-size: 12.86px;">CSS</a> <a href="/tag/chrome/" style="font-size: 11.43px;">Chrome</a> <a href="/tag/dropbox/" style="font-size: 10px;">Dropbox</a> <a href="/tag/excel/" style="font-size: 15.71px;">Excel</a> <a href="/tag/google/" style="font-size: 12.86px;">Google</a> <a href="/tag/html5/" style="font-size: 14.29px;">Html5</a> <a href="/tag/javascript/" style="font-size: 15.71px;">JavaScript</a> <a href="/tag/JavaScript-Google/" style="font-size: 10px;">JavaScript,Google</a> <a href="/tag/Linux/" style="font-size: 14.29px;">Linux</a> <a href="/tag/markdown/" style="font-size: 11.43px;">Markdown</a> <a href="/tag/php/" style="font-size: 11.43px;">PHP</a> <a href="/tag/photoshop/" style="font-size: 11.43px;">Photoshop</a> <a href="/tag/powershell/" style="font-size: 11.43px;">PowerShell</a> <a href="/tag/windows/" style="font-size: 20px;">Windows</a> <a href="/tag/Zabbix/" style="font-size: 12.86px;">Zabbix</a> <a href="/tag/extension/" style="font-size: 18.57px;">扩展</a> <a href="/tag/%E6%A8%A1%E6%9D%BF/" style="font-size: 12.86px;">模板</a> <a href="/tag/template/" style="font-size: 20px;">模版</a> <a href="/tag/network/" style="font-size: 12.86px;">网络</a></div>
+</section>
+<section class="widget">
+  <h3 class="widget-title">归档</h3>
+  <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">2021 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">2021 年 07 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">2020 年 12 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">2020 年 09 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">2020 年 05 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">2020 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">2019 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">2019 年 07 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">2019 年 06 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">2019 年 01 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">2018 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">2018 年 07 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">2018 年 06 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">2018 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">2017 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">2017 年 05 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">2017 年 04 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">2017 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">2017 年 02 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">2016 年 10 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">2016 年 09 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">2016 年 05 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">2015 年 12 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">2015 年 11 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">2015 年 09 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">2014 年 10 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">2014 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">2014 年 02 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">2014 年 01 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">2013 年 12 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">2013 年 09 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">2013 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">2013 年 07 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">2013 年 06 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">2013 年 05 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">2013 年 04 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/02/">2013 年 02 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/01/">2013 年 01 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">2012 年 12 月</a></li></ul>
+</section></div><!-- end #sidebar -->
+  </div>
+</div><!-- end #body -->
+<footer id="footer">&copy; 2012-2022 <a href="https://0x400.net">0x400</a></footer><!-- end #footer -->
+<script type="text/javascript" src="/highlight.min.js"></script>
+<script>
+hljs.highlightAll();            
+</script>
+<script type="text/javascript" src="/highlightjs-line-numbers.min.js"></script>
+<script>
+hljs.initLineNumbersOnLoad();            
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id='UA-115734355-1"></script>
+<script>
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
+ gtag('config', 'UA-115734355-1');
+</script>
+</body>
+</html>
