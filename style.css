@@ -22,10 +22,7 @@ body {
   font-family: 'LXGW WenKai', "Droid Serif", Georgia, "Times New Roman", "PingFang SC", "Hiragino Sans GB", "WenQuanYi Micro Hei", "Microsoft Yahei", serif;
   color: var(--color-primary);
   font-size: 16px;
-  background-attachment: fixed;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center
+  background:url( https://www.bing.com/th?id=OHR.WindmillDay_EN-US5180406924_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp ) fixed center  no-repeat;
 }
 
 a {
