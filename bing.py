@@ -11,7 +11,7 @@ def get_bing():
 def update_css(url):
     with open('style.css', 'r') as f:
         content = f.read()
-        new = re.sub(r'https://www.bing.com(\/.+?)\s', url, content)
+        new = re.sub(r'https://www.bing.com(\/.+?)\s',  'https://www.bing.com'+url, content)
     with open('style.css', 'w') as f:
         f.write(new)
 
