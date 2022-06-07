@@ -45,6 +45,48 @@
     <div id="main" role="main">
  
     <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+      <h2 class="post-title" itemprop="name headline"><a itemprop="url"  href="/post/farbox-editor.html">FarBox Editor编辑器发布</a></h2>
+      <ul class="post-meta">
+        <li><span class="title">发表于：</span><time datetime="2013-02-17T22:31:00+08:00" itemprop="datePublished">2013-02-17</time></li>
+        <li><span class="title">分类：</span> <a class="category-link" href="/category/farbox/">Farbox</a></li>
+      </ul>
+      <div class="post-content" itemprop="articleBody">
+       <p>就在春节前 Farbox 放出了 Mac 版的编辑器测试版，自己没有水果也就没去体验，刚上微博发现 Win 平台的也在下午发布了。</p>
+<p>FarBox Editor是专为 Farbox 定制的 MarkDown 语法的编辑器，从某种角度来说，也是 FarBox.com 的客户端。</p>
+<p>打开编辑器会自动获取到你的网盘目录，并且建立一个新文件，文件以当前日期为名，并且在文件头部也会自动标注当前的时间，值得一提的是，编辑器会自动保存文件，让你更专注于写作！</p>
+<p><img src="/images/2013/02/farbox-editor.jpg"></p>
+<p>FarBox Editor的其他特性，来自<a target="_blank" rel="noopener" href="http://blog.farbox.com/post/farbox/farbox-editor">官网介绍</a>：</p>
+<p>1.双语版，简体中文+英文版 </p>
+<p>2.双系统, Mac+Windows</p>
+<p>3.FarBox.com同源的MarkDown解析，支持代码高亮</p>
+<p>4.支持图片直接拖入</p>
+<p>5.博客目录文件的直接管理，快捷的目录（分类）调整 </p>
+<p>6.可自定制HTML模板文件以及CSS文件 </p>
+<p>7.绑定FarBox上的域名</p>
+
+       
+      </div>
+    </article>
+  
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+      <h2 class="post-title" itemprop="name headline"><a itemprop="url"  href="/post/get-xiami-music.html">获取虾米音乐下载链接</a></h2>
+      <ul class="post-meta">
+        <li><span class="title">发表于：</span><time datetime="2013-02-17T14:05:00+08:00" itemprop="datePublished">2013-02-17</time></li>
+        <li><span class="title">分类：</span> <a class="category-link" href="/category/run/">科学上网</a></li>
+      </ul>
+      <div class="post-content" itemprop="articleBody">
+       
+        <p>今天在<a target="_blank" rel="noopener" href="http://www.cnblogs.com/bobzhou/archive/2013/02/16/bobzhou.html">博客园</a>看到的，通过反编译播放器找到解码音乐资源的地址的算法。</p>
+<p>算法这里就不多解释了，原文有分析，这里说一下获取“加密”地址的过程：</p>
+<p>1.进入单首歌曲介绍页，比如 <code>http://www.xiami.com/song/1768914936</code> ,地址后面的数字就是歌曲的 id</p>
+<p>2.根据 id 找到包含歌曲相关信息的 xml 文件地址，例如 <code>http://www.xiami.com/song/playlist/id/1768914936/object_name/default/object_id/0</code></p>
+<p>3.载入 xml ,获取 location 节点的内容，就是“加密”的地址</p>
+        <p class="more"><a class="btn" href="/post/get-xiami-music.html#more" rel="contents">- 阅读剩余部分 -</a></p>
+       
+      </div>
+    </article>
+  
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
       <h2 class="post-title" itemprop="name headline"><a itemprop="url"  href="/post/farbox-blog.html">Farbox，让网盘变成博客</a></h2>
       <ul class="post-meta">
         <li><span class="title">发表于：</span><time datetime="2013-02-16T15:23:00+08:00" itemprop="datePublished">2013-02-16</time></li>
@@ -296,85 +338,15 @@ $cat_parent = $cat-&gt;parent;//获取分类父级引用
       </div>
     </article>
   
-    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-      <h2 class="post-title" itemprop="name headline"><a itemprop="url"  href="/post/wordpress-get_posts.html">Wordpress获取多篇文章:get_posts()</a></h2>
-      <ul class="post-meta">
-        <li><span class="title">发表于：</span><time datetime="2012-12-14T00:16:00+08:00" itemprop="datePublished">2012-12-14</time></li>
-        <li><span class="title">分类：</span> <a class="category-link" href="/category/wordpress/">Wordpress</a></li>
-      </ul>
-      <div class="post-content" itemprop="articleBody">
-       
-        <p><code>get_posts()</code> 用于在 WordPress 中提取多篇文章。</p>
-<p><strong>调用</strong></p>
-<pre><code class="php">&lt;?php $posts = get_posts($args); ?&gt;
-</code></pre>
-<p><strong>参数</strong></p>
-<pre><code class="php">&lt;?php
-$args = array(
-&#39;numberposts&#39; =&gt; 5,
-&#39;offset&#39; =&gt; 0,
-&#39;category&#39; =&gt; ,
-&#39;orderby&#39; =&gt; &#39;post_date&#39;,
-&#39;order&#39; =&gt; &#39;DESC&#39;,
-&#39;include&#39; =&gt; ,
-&#39;exclude&#39; =&gt; ,
-&#39;meta_key&#39; =&gt; ,
-&#39;meta_value&#39; =&gt; ,
-&#39;post_type&#39; =&gt; &#39;post&#39;,
-&#39;post_mime_type&#39; =&gt; ,
-&#39;post_parent&#39; =&gt; ,
-&#39;post_status&#39; =&gt; &#39;publish&#39; );
-?&gt;
-</code></pre>
-        <p class="more"><a class="btn" href="/post/wordpress-get_posts.html#more" rel="contents">- 阅读剩余部分 -</a></p>
-       
-      </div>
-    </article>
-  
-    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-      <h2 class="post-title" itemprop="name headline"><a itemprop="url"  href="/post/wordpress-wp_nav_menu.html">Wordpress导航菜单:wp_nav_menu()</a></h2>
-      <ul class="post-meta">
-        <li><span class="title">发表于：</span><time datetime="2012-12-14T00:08:00+08:00" itemprop="datePublished">2012-12-14</time></li>
-        <li><span class="title">分类：</span> <a class="category-link" href="/category/wordpress/">Wordpress</a></li>
-      </ul>
-      <div class="post-content" itemprop="articleBody">
-       
-        <p><strong>调用</strong></p>
-<p>在需要调用导航菜单的地方插入<code>&lt;?php wp_nav_menu($args);&gt;</code></p>
-<p><strong><code>wp_nav_menu($args)</code>函数中，参数<code>$args</code>的默认值</strong></p>
-<pre><code class="php">&lt;?php $defaults = array(
-&#39;theme_location&#39; =&gt; ,
-&#39;menu&#39; =&gt; ,
-&#39;container&#39; =&gt; &#39;div&#39;,
-&#39;container_class&#39; =&gt; &#39;menu-&#123;menu slug&#125;-container&#39;,
-&#39;container_id&#39; =&gt; ,
-&#39;menu_class&#39; =&gt; &#39;menu&#39;,
-&#39;menu_id&#39; =&gt; ,
-&#39;echo&#39; =&gt; true,
-&#39;fallback_cb&#39; =&gt; &#39;wp_page_menu&#39;,
-&#39;before&#39; =&gt; ,
-&#39;after&#39; =&gt; ,
-&#39;link_before&#39; =&gt; ,
-&#39;link_after&#39; =&gt; ,
-&#39;items_wrap&#39; =&gt; &#39;&lt;ul id=”%1$s” class=”%2$s”&gt;%3$s&lt;/ul&gt;&#39;,
-&#39;depth&#39; =&gt; 0,
-&#39;walker&#39; =&gt; );
-?&gt;
-</code></pre>
-        <p class="more"><a class="btn" href="/post/wordpress-wp_nav_menu.html#more" rel="contents">- 阅读剩余部分 -</a></p>
-       
-      </div>
-    </article>
-  
   <div class="page-navigator"> <a class="extend prev" rel="prev" href="/archives/page/7/">« 前一页</a><a class="page-number" href="/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/6/">6</a><a class="page-number" href="/archives/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/archives/page/9/">9</a><a class="extend next" rel="next" href="/archives/page/9/">后一页 »</a></div>
 </div>
     <div id="secondary" role="complementary"><section class="widget">
   <h3 class="widget-title">最新文章</h3>
-   <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/post/powershell-copy-item.html">PowerShell 教程：Copy-Item 复制文件和文件夹</a></li><li class="post-list-item"><a class="post-list-link" href="/post/zabbix-email-alert.html">Zabbix 教程：设置邮件报警</a></li><li class="post-list-item"><a class="post-list-link" href="/post/zabbix.html">Zabbix 介绍及使用教程</a></li><li class="post-list-item"><a class="post-list-link" href="/post/debian10-install-zabbix.html">腾讯云轻量服务器 Debian 10 安装 Zabbix 5.4</a></li><li class="post-list-item"><a class="post-list-link" href="/post/huawei-tc7102.html">华为 TC7102 电信定制版路由器接 ITV 机顶盒</a></li><li class="post-list-item"><a class="post-list-link" href="/post/synology.html">群晖折腾记</a></li></ul>
+   <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/post/powershell-copy-item.html">PowerShell 教程：Copy-Item 复制文件和文件夹</a></li><li class="post-list-item"><a class="post-list-link" href="/post/zabbix-email-alert.html">Zabbix 教程：设置邮件报警</a></li><li class="post-list-item"><a class="post-list-link" href="/post/zabbix.html">Zabbix 介绍及使用教程</a></li><li class="post-list-item"><a class="post-list-link" href="/post/debian10-install-zabbix.html">腾讯云轻量服务器 Debian 10 安装 Zabbix 5.4</a></li><li class="post-list-item"><a class="post-list-link" href="/post/%E6%99%BA%E8%83%BD%E6%89%AB%E6%8F%8F%E4%BB%AA.html">智能扫描仪</a></li><li class="post-list-item"><a class="post-list-link" href="/post/%E5%A5%B6%E8%8C%B6%E4%B9%8B%E4%BA%89.html">奶茶之争</a></li></ul>
 </section>
 <section class="widget">
   <h3 class="widget-title">分类</h3>
-   <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/category/dotnet/">.NET</a></li><li class="category-list-item"><a class="category-list-link" href="/category/adobe/">Adobe</a></li><li class="category-list-item"><a class="category-list-link" href="/category/bitcron/">Bitcron</a></li><li class="category-list-item"><a class="category-list-link" href="/category/farbox/">Farbox</a></li><li class="category-list-item"><a class="category-list-link" href="/category/office/">Office</a></li><li class="category-list-item"><a class="category-list-link" href="/category/opera/">Opera</a></li><li class="category-list-item"><a class="category-list-link" href="/category/wordpress/">Wordpress</a></li><li class="category-list-item"><a class="category-list-link" href="/category/code/">代码片段</a></li><li class="category-list-item"><a class="category-list-link" href="/category/develop/">有点技术</a></li><li class="category-list-item"><a class="category-list-link" href="/category/run/">科学上网</a></li><li class="category-list-item"><a class="category-list-link" href="/category/default/">闲言碎语</a></li></ul>
+   <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/category/dotnet/">.NET</a></li><li class="category-list-item"><a class="category-list-link" href="/category/adobe/">Adobe</a></li><li class="category-list-item"><a class="category-list-link" href="/category/bitcron/">Bitcron</a></li><li class="category-list-item"><a class="category-list-link" href="/category/farbox/">Farbox</a></li><li class="category-list-item"><a class="category-list-link" href="/category/office/">Office</a></li><li class="category-list-item"><a class="category-list-link" href="/category/opera/">Opera</a></li><li class="category-list-item"><a class="category-list-link" href="/category/wordpress/">Wordpress</a></li><li class="category-list-item"><a class="category-list-link" href="/category/code/">代码片段</a></li><li class="category-list-item"><a class="category-list-link" href="/category/develop/">有点技术</a></li><li class="category-list-item"><a class="category-list-link" href="/category/dream/">梦游记</a></li><li class="category-list-item"><a class="category-list-link" href="/category/run/">科学上网</a></li><li class="category-list-item"><a class="category-list-link" href="/category/default/">闲言碎语</a></li></ul>
 </section>
 <section class="widget">
   <h3 class="widget-title">标签</h3>
@@ -382,7 +354,7 @@ $args = array(
 </section>
 <section class="widget">
   <h3 class="widget-title">归档</h3>
-  <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">2021 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">2021 年 07 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">2020 年 12 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">2020 年 09 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">2020 年 05 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">2020 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">2019 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">2019 年 07 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">2019 年 06 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">2019 年 01 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">2018 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">2018 年 07 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">2018 年 06 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">2018 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">2017 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">2017 年 05 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">2017 年 04 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">2017 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">2017 年 02 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">2016 年 10 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">2016 年 09 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">2016 年 05 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">2015 年 12 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">2015 年 11 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">2015 年 09 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">2014 年 10 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">2014 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">2014 年 02 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">2014 年 01 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">2013 年 12 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">2013 年 09 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">2013 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">2013 年 07 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">2013 年 06 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">2013 年 05 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">2013 年 04 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/02/">2013 年 02 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/01/">2013 年 01 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">2012 年 12 月</a></li></ul>
+  <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">2021 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">2021 年 07 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">2021 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">2020 年 12 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">2020 年 09 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">2020 年 05 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">2020 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">2019 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">2019 年 07 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">2019 年 06 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">2019 年 01 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">2018 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">2018 年 07 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">2018 年 06 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">2018 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">2017 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">2017 年 05 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">2017 年 04 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">2017 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">2017 年 02 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">2016 年 10 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">2016 年 09 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">2016 年 05 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">2015 年 12 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">2015 年 11 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">2015 年 09 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">2014 年 10 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">2014 年 03 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">2014 年 02 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">2014 年 01 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">2013 年 12 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">2013 年 09 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">2013 年 08 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">2013 年 07 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">2013 年 06 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">2013 年 05 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">2013 年 04 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/02/">2013 年 02 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/01/">2013 年 01 月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">2012 年 12 月</a></li></ul>
 </section></div><!-- end #sidebar -->
   </div>
 </div><!-- end #body -->
